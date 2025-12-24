@@ -1,0 +1,13 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.item:nth-of-type(6) {
+  grid-column: 1 / 1;
+}
+
+.label {
+  display: inline-block;
+  width: 100%;
+}

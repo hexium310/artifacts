@@ -1,0 +1,27 @@
+.element {
+
+}
+
+.fire {
+  color: var(--fire);
+}
+
+.water {
+  color: var(--water);
+}
+
+.earth {
+  color: var(--earth);
+}
+
+.wind {
+  color: var(--wind);
+}
+
+.light {
+  color: var(--light);
+}
+
+.dark {
+  color: var(--dark);
+}

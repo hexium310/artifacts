@@ -1,0 +1,10 @@
+.container {
+  display: grid;
+  grid-template-columns: 12fr 60px;
+  grid-gap: 10px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
