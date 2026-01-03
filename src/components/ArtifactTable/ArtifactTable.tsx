@@ -3,7 +3,6 @@ import { clsx } from "clsx/lite";
 import { ArtifactTableRow as ArtifactTableRowCells } from "@/components/ArtifactTableRow";
 import { getElementFromAttribute } from "@/data/elements";
 import { getWeaponSpecialtyFromKind } from "@/data/weaponSpecialties";
-import { parseSkillId } from "@/utils/parseArtifactHar";
 
 import styles from "./styles.module.css";
 
@@ -70,7 +69,7 @@ export const ArtifactTable: FC<ArtifactTableProps> = ({
                 return true;
               }
 
-              const skillIdSet = new Set(artifact.skills.map((v) => parseSkillId(v.skillId)));
+              const skillIdSet = new Set(artifact.skills.map((v) => v.id));
               return skillFilter.length === 0 || skillFilterSet.intersection(skillIdSet).size !== 0;
             })
             .map((artifact) => {

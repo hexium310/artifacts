@@ -13,8 +13,7 @@ export interface Artifact {
 }
 
 export interface Skill {
-  // TODO: add id: string that result of parsing skillId
-  skillId: number;
+  id: string;
   name: string;
   isMaxQuality: boolean;
   effectValue: string;

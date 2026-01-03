@@ -1,7 +1,5 @@
 import { clsx } from "clsx/lite";
 
-import { parseSkillId } from "@/utils/parseArtifactHar";
-
 import styles from "./styles.module.css";
 
 import type { FC } from "react";
@@ -16,7 +14,7 @@ interface ArtifactTableSkillCellsProps {
 
 export const ArtifactTableSkillCells: FC<ArtifactTableSkillCellsProps> = ({ skill, skillFilter, shouldMark }) => {
   const {
-    skillId,
+    id,
     name,
     effectValue,
     isMaxQuality,
@@ -24,7 +22,7 @@ export const ArtifactTableSkillCells: FC<ArtifactTableSkillCellsProps> = ({ skil
 
   return (
     <>
-      <td className={clsx(shouldMark && skillFilter.includes(parseSkillId(skillId)) && styles.marking)}>
+      <td className={clsx(shouldMark && skillFilter.includes(id) && styles.marking)}>
         {name}
       </td>
       <td className={clsx(isMaxQuality && styles.maxQuality)}>

@@ -8,6 +8,8 @@ import type { SkillGroup, SkillGroups } from "@/types/skillGroup";
 
 type ParseArtifactHarTuple = [Artifact[], SkillGroups];
 
+const parseSkillId = (id: number): string => id.toString().slice(0, -1);
+
 const pickSkill = (skill: ExternalData<RawSkill>): Skill => {
   if (skill.skill_id === undefined
     || skill.name === undefined
@@ -17,7 +19,7 @@ const pickSkill = (skill: ExternalData<RawSkill>): Skill => {
   }
 
   return {
-    skillId: skill.skill_id,
+    id: parseSkillId(skill.skill_id),
     name: skill.name,
     isMaxQuality: skill.is_max_quality,
     effectValue: skill.effect_value,
@@ -69,11 +71,8 @@ const pickArtifact = (artifact: ExternalData<RawArtifact>): Artifact => {
   };
 };
 
-export const parseSkillId = (id: number): string => id.toString().slice(0, -1);
-
 const groupSkill = (skill: Skill): SkillGroup => {
-  const { skillId, name } = skill;
-  const id = parseSkillId(skillId);
+  const { id, name } = skill;
 
   return { [id]: name };
 };
