@@ -9,9 +9,10 @@ import type { FC } from "react";
 
 import type { Artifact } from "@/types/artifact";
 import type { ExternalData } from "@/types/externalData";
+import type { SkillGroups } from "@/types/skillGroup";
 
 interface FileReceiverProps {
-  onResolve: (artifacts: Artifact[]) => void;
+  onResolve: (artifacts: Artifact[], skillGroups: SkillGroups) => void;
 }
 
 export const FileReceiver: FC<FileReceiverProps> = ({ onResolve }) => {

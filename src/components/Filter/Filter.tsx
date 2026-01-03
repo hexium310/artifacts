@@ -5,8 +5,13 @@ import { WeaponSpecialtyFilter } from "@/components/WeaponSpecialtyFilter";
 import styles from "./styles.module.css";
 
 import type { FC } from "react";
+import type { SkillGroups } from "@/types/skillGroup";
 
-export const Filter: FC = () => {
+interface FilterProps {
+  skillGroups: SkillGroups;
+}
+
+export const Filter: FC<FilterProps> = ({ skillGroups }) => {
   return (
     <div className={styles.filter}>
       <div>
@@ -16,7 +21,7 @@ export const Filter: FC = () => {
         <WeaponSpecialtyFilter />
       </div>
       <div className={styles.skill}>
-        <SkillFilter />
+        <SkillFilter skillGroups={skillGroups} />
       </div>
     </div>
   );

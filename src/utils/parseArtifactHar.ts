@@ -4,9 +4,8 @@ import type { FixedLengthArray } from "type-fest";
 import type { Artifact, Skill } from "@/types/artifact";
 import type { ExternalData } from "@/types/externalData";
 import type { RawArtifact, RawPage, RawSkill } from "@/types/harContent";
-import type { SkillGroup } from "@/types/skillGroup";
+import type { SkillGroup, SkillGroups } from "@/types/skillGroup";
 
-type SkillGroups = FixedLengthArray<SkillGroup, 3>;
 type ParseArtifactHarTuple = [Artifact[], SkillGroups];
 
 const pickSkill = (skill: ExternalData<RawSkill>): Skill => {

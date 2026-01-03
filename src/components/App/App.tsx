@@ -7,12 +7,15 @@ import { Filter } from "@/components/Filter";
 import type { FC } from "react";
 
 import type { Artifact } from "@/types/artifact";
+import type { SkillGroups } from "@/types/skillGroup";
 
 export const App: FC = () => {
   const [artifactPages, setArtifactPages] = useState<Artifact[]>([]);
+  const [skillGroups, setSkillGroups] = useState<SkillGroups>([{}, {}, {}]);
 
-  const onResolve = useCallback((artifacts: Artifact[]) => {
+  const onResolve = useCallback((artifacts: Artifact[], skillGroups: SkillGroups) => {
     setArtifactPages(artifacts);
+    setSkillGroups(skillGroups);
   }, [setArtifactPages]);
 
   return (
@@ -22,7 +25,7 @@ export const App: FC = () => {
       </section>
 
       <section>
-        <Filter />
+        <Filter skillGroups={skillGroups}/>
       </section>
 
       <main>
