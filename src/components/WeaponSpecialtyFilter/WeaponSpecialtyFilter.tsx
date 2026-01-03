@@ -4,15 +4,19 @@ import { weaponSpecialties } from "@/data/weaponSpecialties";
 
 import styles from "./styles.module.css";
 
-import type { FC } from "react";
+import type { ChangeEventHandler, FC } from "react";
 
-export const WeaponSpecialtyFilter: FC = () => {
+interface WeaponSpecialtyFilterProps {
+  handleChangeWeaponSpecialtyFilter: ChangeEventHandler<HTMLInputElement>;
+}
+
+export const WeaponSpecialtyFilter: FC<WeaponSpecialtyFilterProps> = ({ handleChangeWeaponSpecialtyFilter }) => {
   const weaponSpecialtyListItems = weaponSpecialties
     .sort((a, b) => a.kind - b.kind)
-    .map(({ kind, text }) => (
-      <li key={kind} className={styles.item}>
+    .map(({ id, text }) => (
+      <li key={id} className={styles.item}>
         <label className={styles.label}>
-          <input type="checkbox" autoComplete="off" name="element" value={text} />
+          <input type="checkbox" autoComplete="off" name="element" value={id} onChange={handleChangeWeaponSpecialtyFilter} />
           {text}
         </label>
       </li>

@@ -1,12 +1,12 @@
+export type Element = typeof Element[keyof typeof Element];
+export type ElementId = Lowercase<keyof typeof Element>;
+type Attribute = typeof attributes[number];
+
 interface ElementRelation {
   attribute: Attribute;
-  id: Lowercase<keyof typeof Element>;
+  id: ElementId;
   text: Element;
 }
-
-export type Element = typeof Element[keyof typeof Element];
-
-type Attribute = typeof attributes[number];
 
 const attributes = [1, 2, 3, 4, 5, 6] as const;
 

@@ -1,12 +1,12 @@
+export type WeaponSpecialty = typeof WeaponSpecialty[keyof typeof WeaponSpecialty];
+export type WeaponSpecialtyId = Lowercase<keyof typeof WeaponSpecialty>;
+type Kind = typeof kinds[number];
+
 interface WeaponSpecialtyRelation {
   kind: Kind;
-  id: Lowercase<keyof typeof WeaponSpecialty>;
+  id: WeaponSpecialtyId;
   text: WeaponSpecialty;
 }
-
-export type WeaponSpecialty = typeof WeaponSpecialty[keyof typeof WeaponSpecialty];
-
-type Kind = typeof kinds[number];
 
 const kinds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
 

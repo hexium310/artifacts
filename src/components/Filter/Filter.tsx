@@ -4,21 +4,24 @@ import { WeaponSpecialtyFilter } from "@/components/WeaponSpecialtyFilter";
 
 import styles from "./styles.module.css";
 
-import type { FC } from "react";
+import type { ChangeEventHandler, FC } from "react";
+
 import type { SkillGroups } from "@/types/skillGroup";
 
 interface FilterProps {
   skillGroups: SkillGroups;
+  handleChangeElementFilter: ChangeEventHandler<HTMLInputElement>;
+  handleChangeWeaponSpecialtyFilter: ChangeEventHandler<HTMLInputElement>;
 }
 
-export const Filter: FC<FilterProps> = ({ skillGroups }) => {
+export const Filter: FC<FilterProps> = ({ skillGroups, handleChangeElementFilter, handleChangeWeaponSpecialtyFilter }) => {
   return (
     <div className={styles.filter}>
       <div>
-        <ElementFilter />
+        <ElementFilter handleChangeElementFilter={handleChangeElementFilter} />
       </div>
       <div>
-        <WeaponSpecialtyFilter />
+        <WeaponSpecialtyFilter handleChangeWeaponSpecialtyFilter={handleChangeWeaponSpecialtyFilter} />
       </div>
       <div className={styles.skill}>
         <SkillFilter skillGroups={skillGroups} />

@@ -6,15 +6,19 @@ import { elements } from "@/data/elements";
 
 import styles from "./styles.module.css";
 
-import type { FC } from "react";
+import type { ChangeEventHandler, FC } from "react";
 
-export const ElementFilter: FC = () => {
+interface ElementFilterProps {
+  handleChangeElementFilter: ChangeEventHandler<HTMLInputElement>;
+}
+
+export const ElementFilter: FC<ElementFilterProps> = ({ handleChangeElementFilter }) => {
   const elementListItems = elements
     .sort((a, b) => a.attribute - b.attribute)
     .map(({ id, text }) => (
       <li key={id}>
         <label className={clsx(styles.label, styles[id])}>
-          <input type="checkbox" autoComplete="off" name="element" value={text} />
+          <input type="checkbox" autoComplete="off" name="element" value={id} onChange={handleChangeElementFilter} />
           {text}
         </label>
       </li>
