@@ -4,27 +4,28 @@ import { FileDataResolver } from "@/components/FileDataResolver";
 import { FileDrop } from "@/components/FileDrop";
 import { readHarFile } from "@/utils/readFile";
 
+import type { Har } from "har-format";
 import type { FC } from "react";
-import type { PartialDeep } from "type-fest";
 
 import type { Artifact } from "@/types/artifact";
+import type { ExternalData } from "@/types/externalData";
 
 interface FileReceiverProps {
   onResolve: (artifacts: Artifact[]) => void;
 }
 
 export const FileReceiver: FC<FileReceiverProps> = ({ onResolve }) => {
-  const [file, setFile] = useState<File | null>(null);
+  const [promise, setPromise] = useState<Promise<ExternalData<Har>> | null>(null);
 
   const handleOpenFile = useCallback((file: File) => {
-    setFile(file);
+    setPromise(readHarFile(file));
   }, []);
 
   return (
     <>
       <FileDrop onDrop={handleOpenFile} />
       <Suspense fallback={<></>}>
-        {file && <FileDataResolver promise={readHarFile(file)} onResolve={onResolve} />}
+        {promise && <FileDataResolver promise={promise} onResolve={onResolve} />}
       </Suspense>
     </>
   );
