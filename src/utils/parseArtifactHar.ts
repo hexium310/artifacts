@@ -69,7 +69,7 @@ const pickArtifact = (artifact: ExternalData<RawArtifact>): Artifact => {
   };
 };
 
-const parseSkillId = (id: number): string => id.toString().slice(0, -1);
+export const parseSkillId = (id: number): string => id.toString().slice(0, -1);
 
 const groupSkill = (skill: Skill): SkillGroup => {
   const { skillId, name } = skill;

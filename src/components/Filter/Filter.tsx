@@ -10,11 +10,23 @@ import type { SkillGroups } from "@/types/skillGroup";
 
 interface FilterProps {
   skillGroups: SkillGroups;
+  skillFilterType: string;
+  skillFilterValues: string[];
   handleChangeElementFilter: ChangeEventHandler<HTMLInputElement>;
   handleChangeWeaponSpecialtyFilter: ChangeEventHandler<HTMLInputElement>;
+  handleChangeSkillFilter: ChangeEventHandler<HTMLSelectElement>;
+  handleChangeSkillFilterType: ChangeEventHandler<HTMLInputElement>;
 }
 
-export const Filter: FC<FilterProps> = ({ skillGroups, handleChangeElementFilter, handleChangeWeaponSpecialtyFilter }) => {
+export const Filter: FC<FilterProps> = ({
+  skillGroups,
+  skillFilterType,
+  skillFilterValues,
+  handleChangeElementFilter,
+  handleChangeWeaponSpecialtyFilter,
+  handleChangeSkillFilter,
+  handleChangeSkillFilterType,
+}) => {
   return (
     <div className={styles.filter}>
       <div>
@@ -24,7 +36,13 @@ export const Filter: FC<FilterProps> = ({ skillGroups, handleChangeElementFilter
         <WeaponSpecialtyFilter handleChangeWeaponSpecialtyFilter={handleChangeWeaponSpecialtyFilter} />
       </div>
       <div className={styles.skill}>
-        <SkillFilter skillGroups={skillGroups} />
+        <SkillFilter
+          skillGroups={skillGroups}
+          skillFilterType={skillFilterType}
+          values={skillFilterValues}
+          handleChangeSkillFilter={handleChangeSkillFilter}
+          handleChangeSkillFilterType={handleChangeSkillFilterType}
+        />
       </div>
     </div>
   );

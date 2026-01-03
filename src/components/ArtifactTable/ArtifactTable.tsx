@@ -3,6 +3,7 @@ import { clsx } from "clsx/lite";
 import { ArtifactTableRow as ArtifactTableRowCells } from "@/components/ArtifactTableRow";
 import { getElementFromAttribute } from "@/data/elements";
 import { getWeaponSpecialtyFromKind } from "@/data/weaponSpecialties";
+import { parseSkillId } from "@/utils/parseArtifactHar";
 
 import styles from "./styles.module.css";
 
@@ -16,9 +17,29 @@ interface ArtifactTableProps {
   artifacts: Artifact[];
   elementFilter: Record<ElementId, boolean>;
   weaponSpecialtyFilter: Record<WeaponSpecialtyId, boolean>;
+  skillFilter: string[];
+  skillFilterType: string;
 }
 
-export const ArtifactTable: FC<ArtifactTableProps> = ({ artifacts, elementFilter, weaponSpecialtyFilter }) => {
+export const ArtifactTable: FC<ArtifactTableProps> = ({
+  artifacts,
+  elementFilter,
+  weaponSpecialtyFilter,
+  skillFilter,
+  skillFilterType,
+}) => {
+  const elementEnableds = Object
+    .entries(elementFilter)
+    .filter(([, enabled]) => enabled)
+    .map(([id]) => id);
+  const weaponSpecialtyEnableds = Object
+    .entries(weaponSpecialtyFilter)
+    .filter(([, enabled]) => enabled)
+    .map(([id]) => id);
+  const skillFilterSet = new Set(skillFilter);
+
+  const rowStyle = clsx(styles.subgrid, styles.row);
+
   return (
     <table className={styles.grid}>
       <thead className={styles.subgrid}>
@@ -40,33 +61,26 @@ export const ArtifactTable: FC<ArtifactTableProps> = ({ artifacts, elementFilter
         {
           artifacts
             .values()
+            .filter((artifact) => elementEnableds.length === 0
+              || elementEnableds.includes(getElementFromAttribute(Number.parseInt(artifact.attribute))?.id ?? ""))
+            .filter((artifact) => weaponSpecialtyEnableds.length === 0
+              || weaponSpecialtyEnableds.includes(getWeaponSpecialtyFromKind(Number.parseInt(artifact.kind))?.id ?? ""))
             .filter((artifact) => {
-              const enableds = Object
-                .entries(elementFilter)
-                .filter(([, enabled]) => enabled)
-                .map(([id]) => id);
-              if (enableds.length === 0) {
+              if (skillFilterType !== "filtering") {
                 return true;
               }
-              return enableds.includes(getElementFromAttribute(Number.parseInt(artifact.attribute))?.id ?? "");
-            })
-            .filter((artifact) => {
-              const enableds = Object
-                .entries(weaponSpecialtyFilter)
-                .filter(([, enabled]) => enabled)
-                .map(([id]) => id);
-              if (enableds.length === 0) {
-                return true;
-              }
-              return enableds.includes(getWeaponSpecialtyFromKind(Number.parseInt(artifact.kind))?.id ?? "");
+
+              const skillIdSet = new Set(artifact.skills.map((v) => parseSkillId(v.skillId)));
+              return skillFilter.length === 0 || skillFilterSet.intersection(skillIdSet).size !== 0;
             })
             .map((artifact) => {
               return (
-                <tr key={artifact.id} className={[styles.subgrid, styles.row].join(" ")}>
-                  <ArtifactTableRowCells artifact={artifact} />
+                <tr key={artifact.id} className={rowStyle}>
+                  <ArtifactTableRowCells artifact={artifact} skillFilter={skillFilter} shouldMark={skillFilterType === "marking"} />
                 </tr>
               );
             })
+            .toArray()
         }
       </tbody>
     </table>

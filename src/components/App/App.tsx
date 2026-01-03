@@ -34,6 +34,8 @@ export const App: FC = () => {
     harp: false,
     katana: false,
   });
+  const [skillFilter, setSkillFilter] = useState<string[]>([]);
+  const [skillFilterType, setSkillFilterType] = useState<string>("marking");
 
   const onResolve = useCallback((artifacts: Artifact[], skillGroups: SkillGroups) => {
     setArtifactPages(artifacts);
@@ -58,6 +60,16 @@ export const App: FC = () => {
     }));
   }, [setWeaponSpecialtyFilter]);
 
+  const handleChangeSkillFilter: ChangeEventHandler<HTMLSelectElement> = useCallback((e) => {
+    const options = [...e.target.selectedOptions];
+    const values = options.map((option) => option.value);
+    setSkillFilter(values);
+  }, [setSkillFilter]);
+
+  const handleChangeSkillFilterType: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
+    setSkillFilterType(e.target.value);
+  }, [setSkillFilterType]);
+
   return (
     <>
       <section>
@@ -65,11 +77,25 @@ export const App: FC = () => {
       </section>
 
       <section>
-        <Filter skillGroups={skillGroups} handleChangeElementFilter={handleChangeElementFilter} handleChangeWeaponSpecialtyFilter={handleChangeWeaponSpecialtyFilter} />
+        <Filter
+          skillGroups={skillGroups}
+          skillFilterValues={skillFilter}
+          skillFilterType={skillFilterType}
+          handleChangeElementFilter={handleChangeElementFilter}
+          handleChangeWeaponSpecialtyFilter={handleChangeWeaponSpecialtyFilter}
+          handleChangeSkillFilter={handleChangeSkillFilter}
+          handleChangeSkillFilterType={handleChangeSkillFilterType}
+        />
       </section>
 
       <main>
-        <ArtifactTable artifacts={artifactPages} elementFilter={elementFilter} weaponSpecialtyFilter={weaponSpecialtyFilter} />
+        <ArtifactTable
+          artifacts={artifactPages}
+          elementFilter={elementFilter}
+          weaponSpecialtyFilter={weaponSpecialtyFilter}
+          skillFilter={skillFilter}
+          skillFilterType={skillFilterType}
+        />
       </main>
     </>
   );

@@ -12,9 +12,11 @@ import type { Artifact } from "@/types/artifact";
 
 interface ArtifactTableRowProps {
   artifact: Artifact;
+  skillFilter: string[];
+  shouldMark: boolean;
 }
 
-export const ArtifactTableRow: FC<ArtifactTableRowProps> = ({ artifact }) => {
+export const ArtifactTableRow: FC<ArtifactTableRowProps> = ({ artifact, skillFilter, shouldMark }) => {
   const {
     name,
     attribute,
@@ -39,10 +41,9 @@ export const ArtifactTableRow: FC<ArtifactTableRowProps> = ({ artifact }) => {
       <td>
         {weaponSpecialty}
       </td>
-      <ArtifactTableSkillCells skill={skills[0]} />
-      <ArtifactTableSkillCells skill={skills[1]} />
-      <ArtifactTableSkillCells skill={skills[2]} />
-      <ArtifactTableSkillCells skill={skills[3]} />
+      {
+        skills.map((skill) => <ArtifactTableSkillCells skill={skill} skillFilter={skillFilter} shouldMark={shouldMark} />)
+      }
     </>
   );
 };
