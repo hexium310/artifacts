@@ -5,15 +5,14 @@ import { FileReceiver } from "@/components/FileReceiver";
 import { Filter } from "@/components/Filter";
 
 import type { FC } from "react";
-import type { PartialDeep } from "type-fest";
 
-import type { Page } from "@/types/artifact";
+import type { Artifact } from "@/types/artifact";
 
 export const App: FC = () => {
-  const [artifactPages, setArtifactPages] = useState<PartialDeep<Page>[]>([]);
+  const [artifactPages, setArtifactPages] = useState<Artifact[]>([]);
 
-  const onResolve = useCallback((pages: PartialDeep<Page>[]) => {
-    setArtifactPages(pages);
+  const onResolve = useCallback((artifacts: Artifact[]) => {
+    setArtifactPages(artifacts);
   }, [setArtifactPages]);
 
   return (
@@ -27,7 +26,7 @@ export const App: FC = () => {
       </section>
 
       <main>
-        <ArtifactTable artifactPages={artifactPages} />
+        <ArtifactTable artifacts={artifactPages} />
       </main>
     </>
   );

@@ -7,10 +7,10 @@ import { readHarFile } from "@/utils/readFile";
 import type { FC } from "react";
 import type { PartialDeep } from "type-fest";
 
-import type { Page } from "@/types/artifact";
+import type { Artifact } from "@/types/artifact";
 
 interface FileReceiverProps {
-  onResolve: (pages: PartialDeep<Page>[]) => void;
+  onResolve: (artifacts: Artifact[]) => void;
 }
 
 export const FileReceiver: FC<FileReceiverProps> = ({ onResolve }) => {

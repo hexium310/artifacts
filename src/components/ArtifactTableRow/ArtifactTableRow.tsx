@@ -19,10 +19,7 @@ export const ArtifactTableRow: FC<ArtifactTableRowProps> = ({ artifact }) => {
     name,
     attribute,
     kind,
-    skill1Info,
-    skill2Info,
-    skill3Info,
-    skill4Info,
+    skills,
   } = artifact;
 
   const {
@@ -42,10 +39,10 @@ export const ArtifactTableRow: FC<ArtifactTableRowProps> = ({ artifact }) => {
       <td>
         {weaponSpecialty}
       </td>
-      <ArtifactTableSkillCells skill={skill1Info} />
-      <ArtifactTableSkillCells skill={skill2Info} />
-      <ArtifactTableSkillCells skill={skill3Info} />
-      <ArtifactTableSkillCells skill={skill4Info} />
+      <ArtifactTableSkillCells skill={skills[0]} />
+      <ArtifactTableSkillCells skill={skills[1]} />
+      <ArtifactTableSkillCells skill={skills[2]} />
+      <ArtifactTableSkillCells skill={skills[3]} />
     </>
   );
 };

@@ -5,15 +5,14 @@ import { ArtifactTableRow as ArtifactTableRowCells } from "@/components/Artifact
 import styles from "./styles.module.css";
 
 import type { FC } from "react";
-import type { PartialDeep } from "type-fest";
 
-import type { Page } from "@/types/artifact";
+import type { Artifact } from "@/types/artifact";
 
 interface ArtifactTableProps {
-  artifactPages: PartialDeep<Page>[];
+  artifacts: Artifact[];
 }
 
-export const ArtifactTable: FC<ArtifactTableProps> = ({ artifactPages }) => {
+export const ArtifactTable: FC<ArtifactTableProps> = ({ artifacts }) => {
   return (
     <table className={styles.grid}>
       <thead className={styles.subgrid}>
@@ -33,15 +32,14 @@ export const ArtifactTable: FC<ArtifactTableProps> = ({ artifactPages }) => {
       </thead>
       <tbody className={styles.subgrid}>
         {
-          artifactPages
-            .map((data) => data.list?.map((artifact) => {
+          artifacts
+            .map((artifact) => {
               return (
                 <tr key={artifact.id} className={[styles.subgrid, styles.row].join(" ")}>
                   <ArtifactTableRowCells artifact={artifact} />
                 </tr>
               );
-            }))
-            .flat()
+            })
         }
       </tbody>
     </table>

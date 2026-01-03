@@ -1,18 +1,9 @@
-export interface Page {
-  list: Artifact[];
-  first: number;
-  last: number;
-  count: number;
-  current: number;
-}
+import type { FixedLengthArray } from "type-fest";
 
 export interface Artifact {
-  artifact_id: number;
+  artifactId: number;
   name: string;
-  skill1Info: Skill;
-  skill2Info: Skill;
-  skill3Info: Skill;
-  skill4Info: Skill;
+  skills: FixedLengthArray<Skill, 4>;
   id: number;
   level: string;
   kind: string;
