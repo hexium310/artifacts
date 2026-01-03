@@ -1,8 +1,12 @@
 import { FilterController } from "@/components/FilterController";
 
-import type { FC } from "react";
+import type { FC, MouseEventHandler } from "react";
 
-export const ElementFilterController: FC = () => {
+interface ElementFilterControllerProps {
+  handleClickElementFilterControllerReset: MouseEventHandler<HTMLButtonElement>;
+}
+
+export const ElementFilterController: FC<ElementFilterControllerProps> = ({ handleClickElementFilterControllerReset }) => {
   return (
     <FilterController>
       <li>
@@ -11,7 +15,7 @@ export const ElementFilterController: FC = () => {
         </button>
       </li>
       <li>
-        <button>
+        <button onClick={handleClickElementFilterControllerReset}>
           reset
         </button>
       </li>

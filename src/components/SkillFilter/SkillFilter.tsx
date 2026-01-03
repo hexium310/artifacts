@@ -3,7 +3,7 @@ import { SkillFilterController } from "@/components/SkillFilterController";
 
 import styles from "./styles.module.css";
 
-import type { ChangeEventHandler, FC } from "react";
+import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
 import type { SkillGroups } from "@/types/skillGroup";
 
@@ -13,6 +13,7 @@ interface SkillFilterProps {
   values: string[];
   handleChangeSkillFilter: ChangeEventHandler<HTMLSelectElement>;
   handleChangeSkillFilterType: ChangeEventHandler<HTMLInputElement>;
+  handleClickSkillFilterControllerReset: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const SkillFilter: FC<SkillFilterProps> = ({
@@ -21,9 +22,13 @@ export const SkillFilter: FC<SkillFilterProps> = ({
   values,
   handleChangeSkillFilter,
   handleChangeSkillFilterType,
+  handleClickSkillFilterControllerReset,
 }) => {
   return (
-    <FilterBase legend="スキル" controller={<SkillFilterController skillFilterType={skillFilterType} handleChangeSkillFilterType={handleChangeSkillFilterType} />}>
+    <FilterBase
+      legend="スキル"
+      controller={<SkillFilterController skillFilterType={skillFilterType} handleChangeSkillFilterType={handleChangeSkillFilterType} handleClickSkillFilterControllerReset={handleClickSkillFilterControllerReset} />}
+    >
       <select className={styles.select} id="skillFilter" multiple value={values} onChange={handleChangeSkillFilter}>
         <optgroup id="skillGroup1" label="⏷スキルグループ I">
           {

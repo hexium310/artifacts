@@ -2,14 +2,19 @@ import { FilterController } from "@/components/FilterController";
 
 import styles from "./styles.module.css";
 
-import type { ChangeEventHandler, FC } from "react";
+import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
 interface SkillFilterControllerProps {
   skillFilterType: string;
   handleChangeSkillFilterType: ChangeEventHandler<HTMLInputElement>;
+  handleClickSkillFilterControllerReset: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const SkillFilterController: FC<SkillFilterControllerProps> = ({ skillFilterType, handleChangeSkillFilterType }) => {
+export const SkillFilterController: FC<SkillFilterControllerProps> = ({
+  skillFilterType,
+  handleChangeSkillFilterType,
+  handleClickSkillFilterControllerReset,
+}) => {
   return (
     <FilterController>
       <li>
@@ -37,7 +42,7 @@ export const SkillFilterController: FC<SkillFilterControllerProps> = ({ skillFil
         </label>
       </li>
       <li className={styles.last}>
-        <button>
+        <button onClick={handleClickSkillFilterControllerReset}>
           reset
         </button>
       </li>

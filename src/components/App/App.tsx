@@ -4,43 +4,49 @@ import { ArtifactTable } from "@/components/ArtifactTable";
 import { FileReceiver } from "@/components/FileReceiver";
 import { Filter } from "@/components/Filter";
 
-import type { ChangeEventHandler, FC } from "react";
+import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
 import type { ElementId } from "@/data/elements";
 import type { WeaponSpecialtyId } from "@/data/weaponSpecialties";
 import type { Artifact } from "@/types/artifact";
 import type { SkillGroups } from "@/types/skillGroup";
 
+const elmentFilterDefault = {
+  fire: false,
+  water: false,
+  earth: false,
+  wind: false,
+  light: false,
+  dark: false,
+};
+
+const weaponSpecialtyFilterDefault = {
+  sabre: false,
+  dagger: false,
+  spear: false,
+  axe: false,
+  staff: false,
+  gun: false,
+  melee: false,
+  bow: false,
+  harp: false,
+  katana: false,
+};
+
+const skillFilterDefault = [] satisfies string[];
+
 export const App: FC = () => {
   const [artifactPages, setArtifactPages] = useState<Artifact[]>([]);
   const [skillGroups, setSkillGroups] = useState<SkillGroups>([{}, {}, {}]);
-  const [elementFilter, setElementFilter] = useState<Record<ElementId, boolean>>({
-    fire: false,
-    water: false,
-    earth: false,
-    wind: false,
-    light: false,
-    dark: false,
-  });
-  const [weaponSpecialtyFilter, setWeaponSpecialtyFilter] = useState<Record<WeaponSpecialtyId, boolean>>({
-    sabre: false,
-    dagger: false,
-    spear: false,
-    axe: false,
-    staff: false,
-    gun: false,
-    melee: false,
-    bow: false,
-    harp: false,
-    katana: false,
-  });
-  const [skillFilter, setSkillFilter] = useState<string[]>([]);
+  const [elementFilter, setElementFilter] = useState<Record<ElementId, boolean>>(elmentFilterDefault);
+  const [weaponSpecialtyFilter, setWeaponSpecialtyFilter] = useState<Record<WeaponSpecialtyId, boolean>>(weaponSpecialtyFilterDefault);
+  const [skillFilter, setSkillFilter] = useState<string[]>(skillFilterDefault);
   const [skillFilterType, setSkillFilterType] = useState<string>("marking");
 
   const onResolve = useCallback((artifacts: Artifact[], skillGroups: SkillGroups) => {
     setArtifactPages(artifacts);
     setSkillGroups(skillGroups);
-  }, [setArtifactPages]);
+  }, []);
 
   const handleChangeElementFilter: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     const { checked, value } = e.target;
@@ -49,7 +55,7 @@ export const App: FC = () => {
       ...v,
       [value]: checked,
     }));
-  }, [setElementFilter]);
+  }, []);
 
   const handleChangeWeaponSpecialtyFilter: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     const { checked, value } = e.target;
@@ -58,17 +64,29 @@ export const App: FC = () => {
       ...v,
       [value]: checked,
     }));
-  }, [setWeaponSpecialtyFilter]);
+  }, []);
 
   const handleChangeSkillFilter: ChangeEventHandler<HTMLSelectElement> = useCallback((e) => {
     const options = [...e.target.selectedOptions];
     const values = options.map((option) => option.value);
     setSkillFilter(values);
-  }, [setSkillFilter]);
+  }, []);
 
   const handleChangeSkillFilterType: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     setSkillFilterType(e.target.value);
-  }, [setSkillFilterType]);
+  }, []);
+
+  const handleClickElementFilterControllerReset: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
+    setElementFilter(elmentFilterDefault);
+  }, []);
+
+  const handleClickWeaponSpecialtyFilterControllerReset: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
+    setWeaponSpecialtyFilter(weaponSpecialtyFilterDefault);
+  }, []);
+
+  const handleClickSkillFilterControllerReset: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
+    setSkillFilter(skillFilterDefault);
+  }, []);
 
   return (
     <>
@@ -78,6 +96,8 @@ export const App: FC = () => {
 
       <section>
         <Filter
+          elementFilter={elementFilter}
+          weaponSpecialtyFilter={weaponSpecialtyFilter}
           skillGroups={skillGroups}
           skillFilterValues={skillFilter}
           skillFilterType={skillFilterType}
@@ -85,6 +105,9 @@ export const App: FC = () => {
           handleChangeWeaponSpecialtyFilter={handleChangeWeaponSpecialtyFilter}
           handleChangeSkillFilter={handleChangeSkillFilter}
           handleChangeSkillFilterType={handleChangeSkillFilterType}
+          handleClickElementFilterControllerReset={handleClickElementFilterControllerReset}
+          handleClickWeaponSpecialtyFilterControllerReset={handleClickWeaponSpecialtyFilterControllerReset}
+          handleClickSkillFilterControllerReset={handleClickSkillFilterControllerReset}
         />
       </section>
 
