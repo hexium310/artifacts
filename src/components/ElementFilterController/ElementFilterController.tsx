@@ -3,10 +3,10 @@ import { FilterController } from "@/components/FilterController";
 import type { FC, MouseEventHandler } from "react";
 
 interface ElementFilterControllerProps {
-  handleClickElementFilterControllerReset: MouseEventHandler<HTMLButtonElement>;
+  onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const ElementFilterController: FC<ElementFilterControllerProps> = ({ handleClickElementFilterControllerReset }) => {
+export const ElementFilterController: FC<ElementFilterControllerProps> = ({ onResetButtonClick }) => {
   return (
     <FilterController>
       <li>
@@ -15,7 +15,7 @@ export const ElementFilterController: FC<ElementFilterControllerProps> = ({ hand
         </button>
       </li>
       <li>
-        <button onClick={handleClickElementFilterControllerReset}>
+        <button onClick={onResetButtonClick}>
           reset
         </button>
       </li>

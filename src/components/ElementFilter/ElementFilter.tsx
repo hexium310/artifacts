@@ -10,35 +10,48 @@ import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
 import type { ElementId } from "@/types/element";
 
+export type ElementFilterStatus = Record<ElementId, boolean>;
+
 interface ElementFilterProps {
-  elementFilter: Record<ElementId, boolean>;
-  handleChangeElementFilter: ChangeEventHandler<HTMLInputElement>;
-  handleClickElementFilterControllerReset: MouseEventHandler<HTMLButtonElement>;
+  filterStatus: ElementFilterStatus;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const ElementFilter: FC<ElementFilterProps> = ({ elementFilter, handleChangeElementFilter, handleClickElementFilterControllerReset }) => {
-  const elementListItems = elements
-    .sort((a, b) => a.attribute - b.attribute)
-    .map(({ id, text }) => (
-      <li key={id}>
-        <label className={clsx(styles.label, styles[id])}>
-          <input
-            type="checkbox"
-            autoComplete="off"
-            name="element"
-            value={id}
-            checked={elementFilter[id]}
-            onChange={handleChangeElementFilter}
-          />
-          {text}
-        </label>
-      </li>
-    ));
-
+export const ElementFilter: FC<ElementFilterProps> = ({
+  filterStatus,
+  onChange,
+  onResetButtonClick,
+}) => {
   return (
-    <FilterBase legend="属性" controller={<ElementFilterController handleClickElementFilterControllerReset={handleClickElementFilterControllerReset} />}>
+    <FilterBase
+      legend="属性"
+      controller={(
+        <ElementFilterController
+          onResetButtonClick={onResetButtonClick}
+        />
+      )}
+    >
       <menu className={styles.list}>
-        {elementListItems}
+        {
+          elements
+            .sort((a, b) => a.attribute - b.attribute)
+            .map(({ id, text }) => (
+              <li key={id}>
+                <label className={clsx(styles.label, styles[id])}>
+                  <input
+                    type="checkbox"
+                    autoComplete="off"
+                    name="element"
+                    value={id}
+                    checked={filterStatus[id]}
+                    onChange={onChange}
+                  />
+                  {text}
+                </label>
+              </li>
+            ))
+        }
       </menu>
     </FilterBase>
   );

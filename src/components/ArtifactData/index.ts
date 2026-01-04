@@ -1,0 +1,1 @@
+export { ArtifactData } from "./ArtifactData";

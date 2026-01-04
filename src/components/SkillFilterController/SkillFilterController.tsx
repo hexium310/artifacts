@@ -6,14 +6,14 @@ import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
 interface SkillFilterControllerProps {
   skillFilterType: string;
-  handleChangeSkillFilterType: ChangeEventHandler<HTMLInputElement>;
-  handleClickSkillFilterControllerReset: MouseEventHandler<HTMLButtonElement>;
+  onSkillFilterTypeChange: ChangeEventHandler<HTMLInputElement>;
+  onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const SkillFilterController: FC<SkillFilterControllerProps> = ({
   skillFilterType,
-  handleChangeSkillFilterType,
-  handleClickSkillFilterControllerReset,
+  onSkillFilterTypeChange,
+  onResetButtonClick,
 }) => {
   return (
     <FilterController>
@@ -25,7 +25,7 @@ export const SkillFilterController: FC<SkillFilterControllerProps> = ({
             name="skill-filter-type"
             value="marking"
             checked={skillFilterType === "marking"}
-            onChange={handleChangeSkillFilterType}
+            onChange={onSkillFilterTypeChange}
           />
           強調
         </label>
@@ -36,13 +36,13 @@ export const SkillFilterController: FC<SkillFilterControllerProps> = ({
             name="skill-filter-type"
             value="filtering"
             checked={skillFilterType === "filtering"}
-            onChange={handleChangeSkillFilterType}
+            onChange={onSkillFilterTypeChange}
           />
           絞込
         </label>
       </li>
       <li className={styles.last}>
-        <button onClick={handleClickSkillFilterControllerReset}>
+        <button onClick={onResetButtonClick}>
           reset
         </button>
       </li>

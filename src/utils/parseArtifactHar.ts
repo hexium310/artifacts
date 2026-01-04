@@ -9,7 +9,7 @@ import type { ExternalData } from "@/types/externalData";
 import type { RawArtifact, RawPage, RawSkill } from "@/types/harContent";
 import type { SkillGroup, SkillGroups } from "@/types/skillGroup";
 
-type ParseArtifactHarTuple = [Artifact[], SkillGroups];
+export type ParseArtifactHarResult = [Artifact[], SkillGroups];
 
 const parseSkillId = (id: number): string => id.toString().slice(0, -1);
 
@@ -96,10 +96,10 @@ const destructiveMergeSkillGroup = (base: SkillGroup, skillGroup: SkillGroup): v
   Object.assign(base, skillGroup);
 };
 
-const defaultValue = (): ParseArtifactHarTuple => [[], [{}, {}, {}]];
+const defaultValue = (): ParseArtifactHarResult => [[], [{}, {}, {}]];
 
-export const parseArtifactHar = (har: ExternalData<Har> | null): ParseArtifactHarTuple => {
-  const result = har?.log?.entries?.reduce<ParseArtifactHarTuple>((pageAccumulator, entry) => {
+export const parseArtifactHar = (har: ExternalData<Har> | null): ParseArtifactHarResult => {
+  const result = har?.log?.entries?.reduce<ParseArtifactHarResult>((pageAccumulator, entry) => {
     const text = entry.response?.content?.text;
     if (text === undefined) {
       throw new Error("har response text is undefined");
@@ -107,7 +107,7 @@ export const parseArtifactHar = (har: ExternalData<Har> | null): ParseArtifactHa
 
     const page = JSON.parse(text) as ExternalData<RawPage>;
 
-    const [artifacts, skillGroups] = page.list?.reduce<ParseArtifactHarTuple>((listAccumulator, item) => {
+    const [artifacts, skillGroups] = page.list?.reduce<ParseArtifactHarResult>((listAccumulator, item) => {
       const artifact = pickArtifact(item);
       const listArtifactAccumulator = listAccumulator[0];
       const listSkillGroupsAccumulator = listAccumulator[1];

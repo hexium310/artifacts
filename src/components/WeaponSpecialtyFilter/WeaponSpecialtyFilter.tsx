@@ -8,39 +8,48 @@ import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
 import type { WeaponSpecialtyId } from "@/types/weaponSpecialty";
 
+export type WeaponSpecialtyFilterStatus = Record<WeaponSpecialtyId, boolean>;
+
 interface WeaponSpecialtyFilterProps {
-  weaponSpecialtyFilter: Record<WeaponSpecialtyId, boolean>;
-  handleChangeWeaponSpecialtyFilter: ChangeEventHandler<HTMLInputElement>;
-  handleClickWeaponSpecialtyFilterControllerReset: MouseEventHandler<HTMLButtonElement>;
+  filterStatus: WeaponSpecialtyFilterStatus;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const WeaponSpecialtyFilter: FC<WeaponSpecialtyFilterProps> = ({
-  weaponSpecialtyFilter,
-  handleChangeWeaponSpecialtyFilter,
-  handleClickWeaponSpecialtyFilterControllerReset,
+  filterStatus,
+  onChange,
+  onResetButtonClick,
 }) => {
-  const weaponSpecialtyListItems = weaponSpecialties
-    .sort((a, b) => a.kind - b.kind)
-    .map(({ id, text }) => (
-      <li key={id} className={styles.item}>
-        <label className={styles.label}>
-          <input
-            type="checkbox"
-            autoComplete="off"
-            name="element"
-            value={id}
-            checked={weaponSpecialtyFilter[id]}
-            onChange={handleChangeWeaponSpecialtyFilter}
-          />
-          {text}
-        </label>
-      </li>
-    ));
-
   return (
-    <FilterBase legend="武器" controller={<WeaponSpecialtyFilterController handleClickWeaponSpecialtyFilterControllerReset={handleClickWeaponSpecialtyFilterControllerReset} />}>
+    <FilterBase
+      legend="武器"
+      controller={(
+        <WeaponSpecialtyFilterController
+          onResetButtonClick={onResetButtonClick}
+        />
+      )}
+    >
       <menu className={styles.list}>
-        {weaponSpecialtyListItems}
+        {
+          weaponSpecialties
+            .sort((a, b) => a.kind - b.kind)
+            .map(({ id, text }) => (
+              <li key={id} className={styles.item}>
+                <label className={styles.label}>
+                  <input
+                    type="checkbox"
+                    autoComplete="off"
+                    name="element"
+                    value={id}
+                    checked={filterStatus[id]}
+                    onChange={onChange}
+                  />
+                  {text}
+                </label>
+              </li>
+            ))
+        }
       </menu>
     </FilterBase>
   );
