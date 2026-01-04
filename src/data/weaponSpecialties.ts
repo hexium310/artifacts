@@ -1,16 +1,8 @@
-export type WeaponSpecialty = typeof WeaponSpecialty[keyof typeof WeaponSpecialty];
-export type WeaponSpecialtyId = Lowercase<keyof typeof WeaponSpecialty>;
-type Kind = typeof kinds[number];
+import type { WeaponSpecialty } from "@/types/weaponSpecialty";
 
-interface WeaponSpecialtyRelation {
-  kind: Kind;
-  id: WeaponSpecialtyId;
-  text: WeaponSpecialty;
-}
+export type WeaponSpecialtyText = typeof WeaponSpecialtyText[keyof typeof WeaponSpecialtyText];
 
-const kinds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as const;
-
-export const WeaponSpecialty = {
+export const WeaponSpecialtyText = {
   Sabre: "剣",
   Dagger: "短剣",
   Spear: "槍",
@@ -27,63 +19,59 @@ export const weaponSpecialties = [
   {
     kind: 1,
     id: "sabre",
-    text: WeaponSpecialty.Sabre,
+    text: WeaponSpecialtyText.Sabre,
   },
   {
     kind: 2,
     id: "dagger",
-    text: WeaponSpecialty.Dagger,
+    text: WeaponSpecialtyText.Dagger,
   },
   {
     kind: 3,
     id: "spear",
-    text: WeaponSpecialty.Spear,
+    text: WeaponSpecialtyText.Spear,
   },
   {
     kind: 4,
     id: "axe",
-    text: WeaponSpecialty.Axe,
+    text: WeaponSpecialtyText.Axe,
   },
   {
     kind: 5,
     id: "staff",
-    text: WeaponSpecialty.Staff,
+    text: WeaponSpecialtyText.Staff,
   },
   {
     kind: 6,
     id: "gun",
-    text: WeaponSpecialty.Gun,
+    text: WeaponSpecialtyText.Gun,
   },
   {
     kind: 7,
     id: "melee",
-    text: WeaponSpecialty.Melee,
+    text: WeaponSpecialtyText.Melee,
   },
   {
     kind: 8,
     id: "bow",
-    text: WeaponSpecialty.Bow,
+    text: WeaponSpecialtyText.Bow,
   },
   {
     kind: 9,
     id: "harp",
-    text: WeaponSpecialty.Harp,
+    text: WeaponSpecialtyText.Harp,
   },
   {
     kind: 10,
     id: "katana",
-    text: WeaponSpecialty.Katana,
+    text: WeaponSpecialtyText.Katana,
   },
-] satisfies WeaponSpecialtyRelation[];
+] satisfies WeaponSpecialty[];
 
-const isKind = (number: number): number is Kind => {
-  return kinds.includes(number as Kind);
+export const getWeaponSpecialtyByKind = (kind: number): WeaponSpecialty | undefined => {
+  return weaponSpecialties.find((weaponSpecialty) => weaponSpecialty.kind === kind);
 };
 
-export const getWeaponSpecialtyFromKind = (kind: number): WeaponSpecialtyRelation | undefined => {
-  if (!isKind(kind)) {
-    return undefined;
-  }
-
-  return weaponSpecialties.find((weaponSpecialty) => weaponSpecialty.kind == kind);
+export const getWeaponSpecialty = (id: string): WeaponSpecialty | undefined => {
+  return weaponSpecialties.find((weaponSpecialty) => weaponSpecialty.id === id);
 };

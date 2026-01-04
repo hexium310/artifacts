@@ -1,15 +1,16 @@
 import type { FixedLengthArray } from "type-fest";
 
+import type { Element } from "@/types/element";
+import type { WeaponSpecialty } from "@/types/weaponSpecialty";
+
 export interface Artifact {
   artifactId: number;
   name: string;
   skills: FixedLengthArray<Skill, 4>;
   id: number;
   level: string;
-  // TODO: change it to weaponSpecialty id
-  kind: string;
-  // TODO: change it to element id
-  attribute: string;
+  element: Element;
+  weaponSpecialty: WeaponSpecialty;
 }
 
 export interface Skill {

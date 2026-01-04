@@ -1,16 +1,14 @@
 import { clsx } from "clsx/lite";
 
 import { ArtifactTableRow as ArtifactTableRowCells } from "@/components/ArtifactTableRow";
-import { getElementFromAttribute } from "@/data/elements";
-import { getWeaponSpecialtyFromKind } from "@/data/weaponSpecialties";
 
 import styles from "./styles.module.css";
 
 import type { FC } from "react";
 
-import type { ElementId } from "@/data/elements";
-import type { WeaponSpecialtyId } from "@/data/weaponSpecialties";
 import type { Artifact } from "@/types/artifact";
+import type { ElementId } from "@/types/element";
+import type { WeaponSpecialtyId } from "@/types/weaponSpecialty";
 
 interface ArtifactTableProps {
   artifacts: Artifact[];
@@ -60,10 +58,8 @@ export const ArtifactTable: FC<ArtifactTableProps> = ({
         {
           artifacts
             .values()
-            .filter((artifact) => elementEnableds.length === 0
-              || elementEnableds.includes(getElementFromAttribute(Number.parseInt(artifact.attribute))?.id ?? ""))
-            .filter((artifact) => weaponSpecialtyEnableds.length === 0
-              || weaponSpecialtyEnableds.includes(getWeaponSpecialtyFromKind(Number.parseInt(artifact.kind))?.id ?? ""))
+            .filter((artifact) => elementEnableds.length === 0 || elementEnableds.includes(artifact.element.id))
+            .filter((artifact) => weaponSpecialtyEnableds.length === 0 || weaponSpecialtyEnableds.includes(artifact.weaponSpecialty.id))
             .filter((artifact) => {
               if (skillFilterType !== "filtering") {
                 return true;

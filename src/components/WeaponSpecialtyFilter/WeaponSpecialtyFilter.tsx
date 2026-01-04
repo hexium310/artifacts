@@ -6,7 +6,7 @@ import styles from "./styles.module.css";
 
 import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
-import type { WeaponSpecialtyId } from "@/data/weaponSpecialties";
+import type { WeaponSpecialtyId } from "@/types/weaponSpecialty";
 
 interface WeaponSpecialtyFilterProps {
   weaponSpecialtyFilter: Record<WeaponSpecialtyId, boolean>;

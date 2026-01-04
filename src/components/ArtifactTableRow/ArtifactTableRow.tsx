@@ -1,8 +1,4 @@
-import { clsx } from "clsx/lite";
-
 import { ArtifactTableSkillCells } from "@/components/ArtifactTableSkillCells";
-import { getElementFromAttribute } from "@/data/elements";
-import { getWeaponSpecialtyFromKind } from "@/data/weaponSpecialties";
 
 import styles from "./styles.module.css";
 
@@ -19,27 +15,26 @@ interface ArtifactTableRowProps {
 export const ArtifactTableRow: FC<ArtifactTableRowProps> = ({ artifact, skillFilter, shouldMark }) => {
   const {
     name,
-    attribute,
-    kind,
+    element: {
+      id: elementId,
+      text: elementText,
+    },
+    weaponSpecialty: {
+      text: weaponSpecialtyText,
+    },
     skills,
   } = artifact;
-
-  const {
-    text: element,
-    id: elementId,
-  } = getElementFromAttribute(Number.parseInt(attribute)) ?? {};
-  const weaponSpecialty = getWeaponSpecialtyFromKind(Number.parseInt(kind))?.text;
 
   return (
     <>
       <td>
         {name}
       </td>
-      <td className={clsx(elementId && styles[elementId])}>
-        {element}
+      <td className={styles[elementId]}>
+        {elementText}
       </td>
       <td>
-        {weaponSpecialty}
+        {weaponSpecialtyText}
       </td>
       {
         skills.map((skill) => <ArtifactTableSkillCells skill={skill} skillFilter={skillFilter} shouldMark={shouldMark} />)

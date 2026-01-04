@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 
 import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
-import type { ElementId } from "@/data/elements";
+import type { ElementId } from "@/types/element";
 
 interface ElementFilterProps {
   elementFilter: Record<ElementId, boolean>;

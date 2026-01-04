@@ -6,9 +6,9 @@ import styles from "./styles.module.css";
 
 import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
-import type { ElementId } from "@/data/elements";
-import type { WeaponSpecialtyId } from "@/data/weaponSpecialties";
+import type { ElementId } from "@/types/element";
 import type { SkillGroups } from "@/types/skillGroup";
+import type { WeaponSpecialtyId } from "@/types/weaponSpecialty";
 
 interface FilterProps {
   elementFilter: Record<ElementId, boolean>;

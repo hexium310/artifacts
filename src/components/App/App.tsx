@@ -6,10 +6,10 @@ import { Filter } from "@/components/Filter";
 
 import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
-import type { ElementId } from "@/data/elements";
-import type { WeaponSpecialtyId } from "@/data/weaponSpecialties";
 import type { Artifact } from "@/types/artifact";
+import type { ElementId } from "@/types/element";
 import type { SkillGroups } from "@/types/skillGroup";
+import type { WeaponSpecialtyId } from "@/types/weaponSpecialty";
 
 const elmentFilterDefault = {
   fire: false,

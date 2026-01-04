@@ -1,3 +1,6 @@
+import { getElementByAttribute } from "@/data/elements";
+import { getWeaponSpecialtyByKind } from "@/data/weaponSpecialties";
+
 import type { Har } from "har-format";
 import type { FixedLengthArray } from "type-fest";
 
@@ -60,14 +63,26 @@ const pickArtifact = (artifact: ExternalData<RawArtifact>): Artifact => {
     pickSkill(skill4_info),
   ] satisfies FixedLengthArray<Skill, 4>;
 
+  const element = getElementByAttribute(Number.parseInt(attribute));
+
+  if (element === undefined) {
+    throw new Error("cannot get element by attribute");
+  }
+
+  const weaponSpecialty = getWeaponSpecialtyByKind(Number.parseInt(kind));
+
+  if (weaponSpecialty === undefined) {
+    throw new Error("cannot get weapon specialty by kind");
+  }
+
   return {
     artifactId: artifact_id,
     name,
     skills,
     id,
     level,
-    kind,
-    attribute,
+    element,
+    weaponSpecialty,
   };
 };
 

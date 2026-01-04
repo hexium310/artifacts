@@ -1,16 +1,8 @@
-export type Element = typeof Element[keyof typeof Element];
-export type ElementId = Lowercase<keyof typeof Element>;
-type Attribute = typeof attributes[number];
+import type { Element } from "@/types/element";
 
-interface ElementRelation {
-  attribute: Attribute;
-  id: ElementId;
-  text: Element;
-}
+export type ElementText = typeof ElementText[keyof typeof ElementText];
 
-const attributes = [1, 2, 3, 4, 5, 6] as const;
-
-export const Element = {
+export const ElementText = {
   Fire: "火",
   Water: "水",
   Earth: "土",
@@ -23,43 +15,39 @@ export const elements = [
   {
     attribute: 1,
     id: "fire",
-    text: Element.Fire,
+    text: ElementText.Fire,
   },
   {
     attribute: 2,
     id: "water",
-    text: Element.Water,
+    text: ElementText.Water,
   },
   {
     attribute: 3,
     id: "earth",
-    text: Element.Earth,
+    text: ElementText.Earth,
   },
   {
     attribute: 4,
     id: "wind",
-    text: Element.Wind,
+    text: ElementText.Wind,
   },
   {
     attribute: 5,
     id: "light",
-    text: Element.Light,
+    text: ElementText.Light,
   },
   {
     attribute: 6,
     id: "dark",
-    text: Element.Dark,
+    text: ElementText.Dark,
   },
-] satisfies ElementRelation[];
+] satisfies Element[];
 
-const isAttribute = (number: number): number is Attribute => {
-  return attributes.includes(number as Attribute);
+export const getElementByAttribute = (attribute: number): Element | undefined => {
+  return elements.find((element) => element.attribute === attribute);
 };
 
-export const getElementFromAttribute = (attribute: number): ElementRelation | undefined => {
-  if (!isAttribute(attribute)) {
-    return undefined;
-  }
-
-  return elements.find((element) => element.attribute === attribute);
+export const getElement = (id: string): Element | undefined => {
+  return elements.find((element) => element.id === id);
 };
