@@ -1,1 +1,1 @@
-export { SkillFilterOptions } from "./SkillFilterOptions";
+export { SkillFilterOptions, SkillFilterOptgroup } from "./SkillFilterOptions";

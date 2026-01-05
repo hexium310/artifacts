@@ -1,8 +1,6 @@
-import { Suspense } from "react";
-
 import { FilterBase } from "@/components/FilterBase";
 import { SkillFilterController } from "@/components/SkillFilterController";
-import { SkillFilterOptions } from "@/components/SkillFilterOptions";
+import { SkillFilterOptgroup } from "@/components/SkillFilterOptions";
 
 import styles from "./styles.module.css";
 
@@ -18,6 +16,8 @@ interface SkillFilterProps {
   onSkillFilterTypeChange: ChangeEventHandler<HTMLInputElement>;
   onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
+
+const skillGroupNumbers = [1, 2, 3] as const;
 
 export const SkillFilter: FC<SkillFilterProps> = ({
   dataPromise,
@@ -39,21 +39,7 @@ export const SkillFilter: FC<SkillFilterProps> = ({
       )}
     >
       <select className={styles.select} id="skillFilter" multiple value={filterValues} onChange={onChange}>
-        <optgroup id="skillGroup1" label="⏷スキルグループ I">
-          <Suspense>
-            { dataPromise && <SkillFilterOptions dataPromise={dataPromise} group={1} /> }
-          </Suspense>
-        </optgroup>
-        <optgroup id="skillGroup2" label="⏷スキルグループ II">
-          <Suspense>
-            { dataPromise && <SkillFilterOptions dataPromise={dataPromise} group={2} /> }
-          </Suspense>
-        </optgroup>
-        <optgroup id="skillGroup3" label="⏷スキルグループ III">
-          <Suspense>
-            { dataPromise && <SkillFilterOptions dataPromise={dataPromise} group={3} /> }
-          </Suspense>
-        </optgroup>
+        {skillGroupNumbers.map((group) => <SkillFilterOptgroup key={group} dataPromise={dataPromise} group={group} />)}
       </select>
     </FilterBase>
   );
