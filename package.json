@@ -7,7 +7,7 @@
     "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint --flag unstable_native_nodejs_ts_config .",
-    "preview": "pnpm run build && vite preview",
+    "preview": "pnpm run build && vite preview --host",
     "deploy": "pnpm run build && wrangler deploy",
     "cf-typegen": "wrangler types"
   },
