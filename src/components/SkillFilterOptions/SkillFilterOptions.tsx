@@ -7,13 +7,11 @@ import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 interface SkillFilterOptionsProps {
   dataPromise: Promise<ParseArtifactHarResult>;
   group: 1 | 2 | 3;
-  filterValues: string[];
 }
 
 interface SkillFilterOptgroupProps {
   dataPromise: Promise<ParseArtifactHarResult> | null;
   group: 1 | 2 | 3;
-  filterValues: string[];
 }
 
 const groupIndex = {
@@ -22,7 +20,7 @@ const groupIndex = {
   3: 2,
 } as const;
 
-export const SkillFilterOptions: FC<SkillFilterOptionsProps> = ({ dataPromise, group, filterValues }) => {
+export const SkillFilterOptions: FC<SkillFilterOptionsProps> = ({ dataPromise, group }) => {
   const [, skillGroups] = use(dataPromise);
 
   const skillGroup = skillGroups[groupIndex[group]];
@@ -41,7 +39,7 @@ const togglePrefix = {
   "⏷": "⏵",
 } as const;
 
-export const SkillFilterOptgroup: FC<SkillFilterOptgroupProps> = ({ dataPromise, group, filterValues }) => {
+export const SkillFilterOptgroup: FC<SkillFilterOptgroupProps> = ({ dataPromise, group }) => {
   const [labelPrefix, setLabelPrefix] = useState<keyof typeof togglePrefix>("⏷");
   const [isOpen, setIsOpen] = useState(true);
 
@@ -58,7 +56,7 @@ export const SkillFilterOptgroup: FC<SkillFilterOptgroupProps> = ({ dataPromise,
       <optgroup label={`${labelPrefix}スキルグループ ${"I".repeat(group)}`} onClick={handleOptgroupClick}>
         <Activity mode={isOpen ? "visible" : "hidden"}>
           <Suspense>
-            { dataPromise && <SkillFilterOptions dataPromise={dataPromise} group={group} filterValues={filterValues} /> }
+            { dataPromise && <SkillFilterOptions dataPromise={dataPromise} group={group} /> }
           </Suspense>
         </Activity>
       </optgroup>

@@ -12,7 +12,7 @@ import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 export const ArtifactData: FC = () => {
   const [dataPromise, setPromise] = useState<Promise<ParseArtifactHarResult> | null>(null);
 
-  const handleDrop = useCallback((file: File) => {
+  const handleFileReceive = useCallback((file: File) => {
     const promise = readHarFile(file);
     const result = promise.then((har) => parseArtifactHar(har));
 
@@ -21,7 +21,7 @@ export const ArtifactData: FC = () => {
 
   return (
     <>
-      <FileDrop onDrop={handleDrop} />
+      <FileDrop onDrop={handleFileReceive} />
 
       <FilterableView dataPromise={dataPromise} />
     </>

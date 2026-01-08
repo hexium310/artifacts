@@ -39,7 +39,7 @@ export const SkillFilter: FC<SkillFilterProps> = ({
       )}
     >
       <select className={styles.select} id="skillFilter" multiple value={filterValues} onChange={onChange}>
-        {skillGroupNumbers.map((group) => <SkillFilterOptgroup key={group} dataPromise={dataPromise} group={group} filterValues={filterValues} />)}
+        {skillGroupNumbers.map((group) => <SkillFilterOptgroup key={group} dataPromise={dataPromise} group={group} />)}
       </select>
     </FilterBase>
   );
