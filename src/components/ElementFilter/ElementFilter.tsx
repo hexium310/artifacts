@@ -13,7 +13,7 @@ import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 import type { ElementFilterStatus } from "@/data/filter";
 
 interface ElementFilterProps {
-  onChange: (element: ElementFilterStatus) => void;
+  readonly onChange: (element: ElementFilterStatus) => void;
 }
 
 const sortedElements = elements.sort((a, b) => a.attribute - b.attribute);

@@ -11,8 +11,8 @@ import type { Filters } from "@/data/filter";
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface ArtifactTableProps {
-  dataPromise: Promise<ParseArtifactHarResult> | null;
-  filters: Filters;
+  readonly dataPromise: Promise<ParseArtifactHarResult> | null;
+  readonly filters: Filters;
 }
 
 const rowStyle = clsx(styles.subgrid, styles.row);

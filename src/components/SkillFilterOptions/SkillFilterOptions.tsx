@@ -5,13 +5,13 @@ import type { FC, MouseEventHandler } from "react";
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface SkillFilterOptionsProps {
-  dataPromise: Promise<ParseArtifactHarResult>;
-  group: 1 | 2 | 3;
+  readonly dataPromise: Promise<ParseArtifactHarResult>;
+  readonly group: 1 | 2 | 3;
 }
 
 interface SkillFilterOptgroupProps {
-  dataPromise: Promise<ParseArtifactHarResult> | null;
-  group: 1 | 2 | 3;
+  readonly dataPromise: Promise<ParseArtifactHarResult> | null;
+  readonly group: 1 | 2 | 3;
 }
 
 const groupIndex = {

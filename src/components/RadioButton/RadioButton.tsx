@@ -1,10 +1,10 @@
 import type { ChangeEventHandler, FC, ReactNode } from "react";
 
 interface RadioButtonProps {
-  children: ReactNode;
-  checked: boolean;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  value: string;
+  readonly children: ReactNode;
+  readonly checked: boolean;
+  readonly onChange: ChangeEventHandler<HTMLInputElement>;
+  readonly value: string;
 }
 
 export const RadioButton: FC<RadioButtonProps> = ({ children, checked, onChange, value }) => {

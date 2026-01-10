@@ -3,9 +3,9 @@ import styles from "./styles.module.css";
 import type { FC, ReactNode } from "react";
 
 interface FilterBaseProps {
-  children: ReactNode;
-  legend: string;
-  controller?: ReactNode;
+  readonly children: ReactNode;
+  readonly legend: string;
+  readonly controller?: ReactNode;
 }
 
 export const FilterBase: FC<FilterBaseProps> = ({ children, legend, controller }) => {

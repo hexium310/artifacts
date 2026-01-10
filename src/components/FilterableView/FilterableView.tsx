@@ -10,7 +10,7 @@ import type { Filters } from "@/data/filter";
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface FilterableViewProps {
-  dataPromise: Promise<ParseArtifactHarResult> | null;
+  readonly dataPromise: Promise<ParseArtifactHarResult> | null;
 }
 
 export const FilterableView: FC<FilterableViewProps> = ({ dataPromise }) => {

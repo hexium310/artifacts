@@ -3,7 +3,7 @@ import { FilterController } from "@/components/FilterController";
 import type { FC, MouseEventHandler } from "react";
 
 interface ElementFilterControllerProps {
-  onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
+  readonly onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const ElementFilterController: FC<ElementFilterControllerProps> = ({ onResetButtonClick }) => {

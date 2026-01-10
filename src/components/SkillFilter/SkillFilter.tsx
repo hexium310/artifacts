@@ -12,9 +12,9 @@ import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface SkillFilterProps {
-  dataPromise: Promise<ParseArtifactHarResult> | null;
-  onChange: (values: string[]) => void;
-  onFilterTypeChange: (filterType: string) => void;
+  readonly dataPromise: Promise<ParseArtifactHarResult> | null;
+  readonly onChange: (values: readonly string[]) => void;
+  readonly onFilterTypeChange: (filterType: string) => void;
 }
 
 const skillGroupNumbers = [1, 2, 3] as const;

@@ -12,8 +12,8 @@ import type { ElementFilterStatus, Filters, WeaponSpecialtyFilterStatus } from "
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface FilterProps {
-  dataPromise: Promise<ParseArtifactHarResult> | null;
-  onFilterChange: (callback: (filter: Filters) => Filters) => void;
+  readonly dataPromise: Promise<ParseArtifactHarResult> | null;
+  readonly onFilterChange: (callback: (filter: Filters) => Filters) => void;
 }
 
 export const Filter: FC<FilterProps> = ({ dataPromise, onFilterChange }) => {

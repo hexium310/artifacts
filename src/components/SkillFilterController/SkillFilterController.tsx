@@ -8,8 +8,8 @@ import styles from "./styles.module.css";
 import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
 interface SkillFilterControllerProps {
-  onFilterTypeChange: (filterType: string) => void;
-  onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
+  readonly onFilterTypeChange: (filterType: string) => void;
+  readonly onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const SkillFilterController: FC<SkillFilterControllerProps> = ({

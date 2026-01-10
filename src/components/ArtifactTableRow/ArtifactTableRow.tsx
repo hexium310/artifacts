@@ -11,11 +11,11 @@ import type { ElementFilterStatus, WeaponSpecialtyFilterStatus } from "@/data/fi
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface ArtifactTableRowProps {
-  dataPromise: Promise<ParseArtifactHarResult>;
-  elementFilter: ElementFilterStatus;
-  weaponSpecialtyFilter: WeaponSpecialtyFilterStatus;
-  skillFilter: string[];
-  skillFilterType: string;
+  readonly dataPromise: Promise<ParseArtifactHarResult>;
+  readonly elementFilter: ElementFilterStatus;
+  readonly weaponSpecialtyFilter: WeaponSpecialtyFilterStatus;
+  readonly skillFilter: readonly string[];
+  readonly skillFilterType: string;
 }
 
 const rowStyle = clsx(styles.subgrid, styles.row);

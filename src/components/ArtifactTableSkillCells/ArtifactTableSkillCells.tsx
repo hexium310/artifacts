@@ -7,9 +7,9 @@ import type { FC } from "react";
 import type { Skill } from "@/types/artifact";
 
 interface ArtifactTableSkillCellsProps {
-  skill: Skill;
-  skillFilter: string[];
-  shouldMark: boolean;
+  readonly skill: Skill;
+  readonly skillFilter: readonly string[];
+  readonly shouldMark: boolean;
 }
 
 export const ArtifactTableSkillCells: FC<ArtifactTableSkillCellsProps> = ({ skill, skillFilter, shouldMark }) => {

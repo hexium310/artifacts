@@ -5,7 +5,7 @@ import { getFilesFromTransferItems } from "@/utils/getFilesFromTransferItems";
 import type { FC } from "react";
 
 interface FileDropProps {
-  onDrop: (file: File) => void;
+  readonly onDrop: (file: File) => void;
 }
 
 export const FileDrop: FC<FileDropProps> = ({ onDrop }) => {
