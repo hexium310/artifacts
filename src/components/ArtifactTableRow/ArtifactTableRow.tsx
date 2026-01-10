@@ -7,8 +7,7 @@ import styles from "./styles.module.css";
 
 import type { FC } from "react";
 
-import type { ElementFilterStatus } from "@/components/ElementFilter/ElementFilter";
-import type { WeaponSpecialtyFilterStatus } from "@/components/WeaponSpecialtyFilter/WeaponSpecialtyFilter";
+import type { ElementFilterStatus, WeaponSpecialtyFilterStatus } from "@/data/filter";
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface ArtifactTableRowProps {

@@ -7,26 +7,19 @@ import styles from "./styles.module.css";
 
 import type { FC } from "react";
 
-import type { ElementId } from "@/types/element";
-import type { WeaponSpecialtyId } from "@/types/weaponSpecialty";
+import type { Filters } from "@/data/filter";
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface ArtifactTableProps {
   dataPromise: Promise<ParseArtifactHarResult> | null;
-  elementFilterStatus: Record<ElementId, boolean>;
-  weaponSpecialtyFilterStatus: Record<WeaponSpecialtyId, boolean>;
-  skillFilterValues: string[];
-  skillFilterType: string;
+  filters: Filters;
 }
 
 const rowStyle = clsx(styles.subgrid, styles.row);
 
 export const ArtifactTable: FC<ArtifactTableProps> = ({
   dataPromise,
-  elementFilterStatus: elementFilter,
-  weaponSpecialtyFilterStatus: weaponSpecialtyFilter,
-  skillFilterValues: skillFilter,
-  skillFilterType,
+  filters,
 }) => {
   return (
     <table className={styles.grid}>
@@ -51,10 +44,10 @@ export const ArtifactTable: FC<ArtifactTableProps> = ({
             dataPromise && (
               <ArtifactTableRow
                 dataPromise={dataPromise}
-                elementFilter={elementFilter}
-                weaponSpecialtyFilter={weaponSpecialtyFilter}
-                skillFilter={skillFilter}
-                skillFilterType={skillFilterType}
+                elementFilter={filters.element}
+                weaponSpecialtyFilter={filters.weaponSpecialty}
+                skillFilter={filters.skill.values}
+                skillFilterType={filters.skill.filterType}
               />
             )
           }

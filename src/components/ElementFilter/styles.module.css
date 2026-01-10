@@ -3,11 +3,6 @@
   grid-template-columns: repeat(6, 1fr);
 }
 
-.label {
-  display: inline-block;
-  width: 100%;
-}
-
 .fire {
   color: var(--fire);
 }

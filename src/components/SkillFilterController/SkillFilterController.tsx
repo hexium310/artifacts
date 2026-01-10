@@ -1,45 +1,39 @@
+import { useCallback, useState } from "react";
+
 import { FilterController } from "@/components/FilterController";
+import { RadioButton } from "@/components/RadioButton";
 
 import styles from "./styles.module.css";
 
 import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 
 interface SkillFilterControllerProps {
-  skillFilterType: string;
-  onSkillFilterTypeChange: ChangeEventHandler<HTMLInputElement>;
+  onFilterTypeChange: (filterType: string) => void;
   onResetButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const SkillFilterController: FC<SkillFilterControllerProps> = ({
-  skillFilterType,
-  onSkillFilterTypeChange,
+  onFilterTypeChange,
   onResetButtonClick,
 }) => {
+  const [skillFilterType, setSkillFilterType] = useState<string>("marking");
+
+  const handleSkillFilterTypeChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
+    const { value } = e.target;
+
+    setSkillFilterType(value);
+    onFilterTypeChange(value);
+  }, [onFilterTypeChange]);
+
   return (
     <FilterController>
       <li>
-        <label>
-          <input
-            type="radio"
-            autoComplete="off"
-            name="skill-filter-type"
-            value="marking"
-            checked={skillFilterType === "marking"}
-            onChange={onSkillFilterTypeChange}
-          />
+        <RadioButton value="marking" checked={skillFilterType === "marking"} onChange={handleSkillFilterTypeChange}>
           強調
-        </label>
-        <label>
-          <input
-            type="radio"
-            autoComplete="off"
-            name="skill-filter-type"
-            value="filtering"
-            checked={skillFilterType === "filtering"}
-            onChange={onSkillFilterTypeChange}
-          />
+        </RadioButton>
+        <RadioButton value="filtering" checked={skillFilterType === "filtering"} onChange={handleSkillFilterTypeChange}>
           絞込
-        </label>
+        </RadioButton>
       </li>
       <li className={styles.last}>
         <button onClick={onResetButtonClick}>
