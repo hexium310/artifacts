@@ -1,1 +1,0 @@
-export { ArtifactTableSkillCells } from "./ArtifactTableSkillCells";

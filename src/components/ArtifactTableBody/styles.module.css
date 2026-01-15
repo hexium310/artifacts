@@ -3,3 +3,39 @@
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
 }
+
+.fire {
+  color: var(--fire);
+}
+
+.water {
+  color: var(--water);
+}
+
+.earth {
+  color: var(--earth);
+}
+
+.wind {
+  color: var(--wind);
+}
+
+.light {
+  color: var(--light);
+}
+
+.dark {
+  color: var(--dark);
+}
+
+.max-quality {
+  color: #7f12b7;
+}
+
+.marking {
+  background-color: #b2ff59;
+}
+
+.virtual-scroll-item {
+  position: absolute;
+}

@@ -1,5 +1,6 @@
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { use } from "react";
+import { clsx } from "clsx/lite";
+import { Fragment, use } from "react";
 
 import { ArtifactTableBodyRow } from "@/components/ArtifactTableBodyRow";
 
@@ -66,6 +67,8 @@ export const ArtifactTableBody: FC<ArtifactTableBodyProps> = ({ dataPromise, fil
     overscan: 5,
   });
 
+  const shouldMark = filters.skill.filterType === "marking";
+
   return (
     <tbody className={styles.subgrid} style={{ height: `${virtualizer.getTotalSize().toString()}px` }}>
       {
@@ -77,10 +80,23 @@ export const ArtifactTableBody: FC<ArtifactTableBodyProps> = ({ dataPromise, fil
             return (
               <ArtifactTableBodyRow
                 key={artifact.id}
-                virtualRow={virtualRow}
-                virtualizer={virtualizer}
-                artifact={artifact}
-                skillFilter={filters.skill}
+                className={styles.virtualScrollItem}
+                ref={(node) => { virtualizer.measureElement(node); }}
+                rowIndex={virtualRow.index}
+                rowStart={virtualRow.start.toString()}
+                renderName={() => <td>{artifact.name}</td>}
+                renderElement={() => <td className={styles[artifact.element.id]}>{artifact.element.text}</td>}
+                renderWeaponSpecialty={() => <td>{artifact.weaponSpecialty.text}</td>}
+                renderSkills={() => artifact.skills.map((skill) => (
+                  <Fragment key={skill.id}>
+                    <td className={clsx(shouldMark && filters.skill.values.includes(skill.id) && styles.marking)}>
+                      {skill.name}
+                    </td>
+                    <td className={clsx(skill.isMaxQuality && styles.maxQuality)}>
+                      {skill.effectValue}
+                    </td>
+                  </Fragment>
+                ))}
               />
             );
           })
