@@ -1,1 +1,0 @@
-export { ArtifactTableRow } from "./ArtifactTableRow";

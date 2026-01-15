@@ -4,16 +4,17 @@ import { ArtifactTable } from "@/components/ArtifactTable";
 import { Filter } from "@/components/Filter/Filter";
 import { filtersDefault } from "@/data/filter";
 
-import type { FC } from "react";
+import type { FC, RefObject } from "react";
 
 import type { Filters } from "@/data/filter";
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
 
 interface FilterableViewProps {
   readonly dataPromise: Promise<ParseArtifactHarResult> | null;
+  readonly virtualScrollRef: RefObject<HTMLDivElement | null>;
 }
 
-export const FilterableView: FC<FilterableViewProps> = ({ dataPromise }) => {
+export const FilterableView: FC<FilterableViewProps> = ({ dataPromise, virtualScrollRef }) => {
   const [filters, setFilters] = useState<Filters>(filtersDefault);
 
   const handleFiltersChange: (callback: (filter: Filters) => Filters) => void = useCallback((callback) => {
@@ -30,6 +31,7 @@ export const FilterableView: FC<FilterableViewProps> = ({ dataPromise }) => {
         <ArtifactTable
           dataPromise={dataPromise}
           filters={filters}
+          virtualScrollRef={virtualScrollRef}
         />
       </main>
     </>

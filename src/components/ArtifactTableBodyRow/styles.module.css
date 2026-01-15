@@ -2,10 +2,16 @@
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 1 / -1;
+  grid-template-columns: 2fr 1rem 1rem repeat(4, 3fr 1fr);
+  grid-gap: 8px;
 }
 
 .row {
   border-bottom: solid 1px;
+}
+
+.virtual-scroll-item {
+  position: absolute;
 }
 
 .fire {

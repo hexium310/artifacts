@@ -1,0 +1,8 @@
+.virtual-scroll {
+  --padding: 8px;
+
+  position: relative;
+  height: calc(100svh - var(--padding) * 2);
+  padding: var(--padding);
+  overflow: auto;
+}

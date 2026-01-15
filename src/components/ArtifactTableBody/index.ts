@@ -1,0 +1,1 @@
+export { ArtifactTableBody } from "./ArtifactTableBody";

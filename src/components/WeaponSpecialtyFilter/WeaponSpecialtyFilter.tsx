@@ -13,7 +13,7 @@ import type { ChangeEventHandler, FC, MouseEventHandler } from "react";
 import type { WeaponSpecialtyFilterStatus } from "@/data/filter";
 
 interface WeaponSpecialtyFilterProps {
-  onChange: (WeaponSpecialty: WeaponSpecialtyFilterStatus) => void;
+  readonly onChange: (WeaponSpecialty: WeaponSpecialtyFilterStatus) => void;
 }
 
 const sortedWeaponSpecialties = weaponSpecialties.sort((a, b) => a.kind - b.kind);
