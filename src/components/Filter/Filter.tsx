@@ -31,7 +31,7 @@ export const Filter: FC<FilterProps> = ({ dataPromise, onFilterChange }) => {
     } satisfies Filters));
   }, [onFilterChange]);
 
-  const handleSkillFilterChange = useCallback((values: string[]): void => {
+  const handleSkillFilterChange = useCallback((values: readonly string[]): void => {
     onFilterChange((v) => ({
       ...v,
       skill: {

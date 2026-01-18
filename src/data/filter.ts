@@ -9,7 +9,7 @@ export interface Filters {
   weaponSpecialty: WeaponSpecialtyFilterStatus;
   skill: {
     filterType: string;
-    values: string[];
+    values: readonly string[];
   };
 }
 
