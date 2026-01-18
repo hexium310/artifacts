@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+  ],
+  "dependencyDashboard": false,
+  "timezone": "Asia/Tokyo",
+  "schedule": ["* 0-3 * * 6"],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "rangeStrategy": "bump",
+  "labels": ["dependencies"],
+  "commitMessageAction": "Bump",
+  "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}",
+  "commitMessageTopic": "{{#if isGroup}}{{groupName}}{{else}}{{depName}}{{/if}}",
+  "commitMessageSuffix": "{{#if isGroup}}with {{upgrades.length}} updates{{/if}}",
+  "packageRules": [
+    {
+      "matchManagers": "npm",
+      "addLabels": ["javascript"]
+    }
+  ]
+}
