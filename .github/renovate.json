@@ -20,6 +20,10 @@
       "addLabels": ["javascript"]
     },
     {
+      "matchManagers": "github-actions",
+      "addLabels": ["github_actions"]
+    },
+    {
       "extends": ["packages:eslint"],
       "groupName": "eslint"
     }
