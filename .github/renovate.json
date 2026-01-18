@@ -18,6 +18,10 @@
     {
       "matchManagers": "npm",
       "addLabels": ["javascript"]
+    },
+    {
+      "extends": ["packages:eslint"],
+      "groupName": "eslint"
     }
   ]
 }
