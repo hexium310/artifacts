@@ -26,6 +26,13 @@
     {
       "extends": ["packages:eslint"],
       "groupName": "eslint"
+    },
+    {
+      "matchDepNames": [
+        "wrangler",
+        "@cloudflare/*"
+      ],
+      "groupName": "cloudflare",
     }
   ]
 }
