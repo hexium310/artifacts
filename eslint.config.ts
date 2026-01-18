@@ -15,11 +15,6 @@ const gitignorePath = fileURLToPath(new URL("./.gitignore", import.meta.url));
 export default defineConfig(
   includeIgnoreFile(gitignorePath),
   {
-    ignores: [
-      "worker-configuration.d.ts",
-    ],
-  },
-  {
     languageOptions: {
       globals: globals.browser,
     },
