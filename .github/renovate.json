@@ -12,7 +12,7 @@
   "labels": ["dependencies"],
   "commitMessageAction": "Bump",
   "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}",
-  "commitMessageTopic": "{{#if isGroup}}{{groupName}}{{else}}{{depName}}{{/if}}",
+  "commitMessageTopic": "{{#if isGroup}}the {{groupName}} group{{else}}{{depName}}{{/if}}",
   "commitMessageSuffix": "{{#if isGroup}}with {{upgrades.length}} updates{{/if}}",
   "packageRules": [
     {
