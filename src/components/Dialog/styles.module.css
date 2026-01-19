@@ -1,0 +1,30 @@
+.dialog:open {
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-areas:
+    ". close"
+    "content content";
+}
+
+.close {
+  grid-area: close;
+  height: 25px;
+  aspect-ratio: 1 / 1;
+}
+
+.close-button {
+  padding: 0;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+  border-color: transparent;
+  border-radius: 5px;
+  &:not(:hover) {
+    background-color: transparent;
+  }
+}
+
+.content {
+  grid-area: content;
+}
