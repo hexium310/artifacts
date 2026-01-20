@@ -14,6 +14,8 @@ interface ArtifactTableProps {
   readonly dataPromise: Promise<ParseArtifactHarResult> | null;
   readonly filters: Filters;
   readonly virtualScrollRef: RefObject<HTMLDivElement | null>;
+  readonly unnecessaries: Set<number>;
+  readonly onRowClick: (id: number) => void;
 }
 
 const rowStyle = clsx(styles.subgrid, styles.row);
@@ -22,12 +24,15 @@ export const ArtifactTable: FC<ArtifactTableProps> = ({
   dataPromise,
   filters,
   virtualScrollRef,
+  unnecessaries,
+  onRowClick,
 }) => {
   return (
     <div>
       <table className={styles.grid}>
         <thead className={styles.subgrid}>
           <tr className={rowStyle}>
+            <th>不要</th>
             <th>名前</th>
             <th>属性</th>
             <th>武器</th>
@@ -48,6 +53,8 @@ export const ArtifactTable: FC<ArtifactTableProps> = ({
                 dataPromise={dataPromise}
                 filters={filters}
                 virtualScrollRef={virtualScrollRef}
+                unnecessaries={unnecessaries}
+                onRowClick={onRowClick}
               />
             )
           }

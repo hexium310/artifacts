@@ -6,8 +6,8 @@ import type { ChangeEventHandler, FC, ReactNode } from "react";
 
 interface CheckboxProps {
   readonly className?: string;
-  readonly children: ReactNode;
-  readonly value: string;
+  readonly children?: ReactNode;
+  readonly value?: string;
   readonly checked: boolean;
   readonly onChange: ChangeEventHandler<HTMLInputElement>;
 }

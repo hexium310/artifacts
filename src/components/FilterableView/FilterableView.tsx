@@ -16,9 +16,21 @@ interface FilterableViewProps {
 
 export const FilterableView: FC<FilterableViewProps> = ({ dataPromise, virtualScrollRef }) => {
   const [filters, setFilters] = useState<Filters>(filtersDefault);
+  const [unnecessaries, setUnnecessaries] = useState(new Set<number>());
 
   const handleFiltersChange: (callback: (filter: Filters) => Filters) => void = useCallback((callback) => {
     setFilters(callback);
+  }, []);
+
+  const handleRowClick = useCallback((id: number) => {
+    setUnnecessaries((v) => {
+      const newTrashes = new Set(v);
+      const succeeded = newTrashes.delete(id);
+      if (!succeeded) {
+        newTrashes.add(id);
+      }
+      return newTrashes;
+    });
   }, []);
 
   return (
@@ -32,6 +44,8 @@ export const FilterableView: FC<FilterableViewProps> = ({ dataPromise, virtualSc
           dataPromise={dataPromise}
           filters={filters}
           virtualScrollRef={virtualScrollRef}
+          unnecessaries={unnecessaries}
+          onRowClick={handleRowClick}
         />
       </main>
     </>
