@@ -9,7 +9,7 @@ import type { ExternalData } from "@/types/externalData";
 import type { RawArtifact, RawPage, RawSkill } from "@/types/harContent";
 import type { SkillGroup, SkillGroups } from "@/types/skillGroup";
 
-export type ParseArtifactHarResult = [Artifact[], SkillGroups];
+export type ParseArtifactHarResult = [Artifact[], Record<number, { page: number; position: number }>, SkillGroups];
 
 const parseSkillId = (id: number): string => id.toString().slice(0, -1);
 
@@ -96,10 +96,10 @@ const destructiveMergeSkillGroup = (base: SkillGroup, skillGroup: SkillGroup): v
   Object.assign(base, skillGroup);
 };
 
-const defaultValue = (): ParseArtifactHarResult => [[], [{}, {}, {}]];
+const defaultValue = (): ParseArtifactHarResult => [[], {}, [{}, {}, {}]];
 
 export const parseArtifactHar = (har: ExternalData<Har> | null): ParseArtifactHarResult => {
-  const result = har?.log?.entries?.reduce<ParseArtifactHarResult>((pageAccumulator, entry) => {
+  const result = har?.log?.entries?.reduce<ParseArtifactHarResult>((pageAccumulator, entry, pageIndex) => {
     const text = entry.response?.content?.text;
     if (text === undefined) {
       throw new Error("har response text is undefined");
@@ -107,12 +107,14 @@ export const parseArtifactHar = (har: ExternalData<Har> | null): ParseArtifactHa
 
     const page = JSON.parse(text) as ExternalData<RawPage>;
 
-    const [artifacts, skillGroups] = page.list?.reduce<ParseArtifactHarResult>((listAccumulator, item) => {
+    const [artifacts, artifactPositions, skillGroups] = page.list?.reduce<ParseArtifactHarResult>((listAccumulator, item, listIndex) => {
       const artifact = pickArtifact(item);
       const listArtifactAccumulator = listAccumulator[0];
-      const listSkillGroupsAccumulator = listAccumulator[1];
+      const listArtifactPositionsAccumulator = listAccumulator[1];
+      const listSkillGroupsAccumulator = listAccumulator[2];
 
       listArtifactAccumulator.push(artifact);
+      listArtifactPositionsAccumulator[artifact.id] = { page: pageIndex + 1, position: listIndex };
       destructiveMergeSkillGroup(listSkillGroupsAccumulator[0], groupSkill(artifact.skills[0]));
       destructiveMergeSkillGroup(listSkillGroupsAccumulator[0], groupSkill(artifact.skills[1]));
       destructiveMergeSkillGroup(listSkillGroupsAccumulator[1], groupSkill(artifact.skills[2]));
@@ -122,9 +124,11 @@ export const parseArtifactHar = (har: ExternalData<Har> | null): ParseArtifactHa
     }, defaultValue()) ?? defaultValue();
 
     const pageArtifactAccumulator = pageAccumulator[0];
-    const pageSkillGroupsAccumulator = pageAccumulator[1];
+    const pageArtifactPositionsAccumulator = pageAccumulator[1];
+    const pageSkillGroupsAccumulator = pageAccumulator[2];
 
     pageArtifactAccumulator.push(...artifacts);
+    Object.assign(pageArtifactPositionsAccumulator, artifactPositions);
     destructiveMergeSkillGroup(pageSkillGroupsAccumulator[0], skillGroups[0]);
     destructiveMergeSkillGroup(pageSkillGroupsAccumulator[1], skillGroups[1]);
     destructiveMergeSkillGroup(pageSkillGroupsAccumulator[2], skillGroups[2]);

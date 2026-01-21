@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 
 import { ArtifactTable } from "@/components/ArtifactTable";
 import { Filter } from "@/components/Filter/Filter";
+import { InGameListModal } from "@/components/InGameListModal";
 import { filtersDefault } from "@/data/filter";
 
 import type { FC, RefObject } from "react";
@@ -24,12 +25,12 @@ export const FilterableView: FC<FilterableViewProps> = ({ dataPromise, virtualSc
 
   const handleRowClick = useCallback((id: number) => {
     setUnnecessaries((v) => {
-      const newTrashes = new Set(v);
-      const succeeded = newTrashes.delete(id);
+      const newSet = new Set(v);
+      const succeeded = newSet.delete(id);
       if (!succeeded) {
-        newTrashes.add(id);
+        newSet.add(id);
       }
-      return newTrashes;
+      return newSet;
     });
   }, []);
 
@@ -37,6 +38,10 @@ export const FilterableView: FC<FilterableViewProps> = ({ dataPromise, virtualSc
     <>
       <section>
         <Filter dataPromise={dataPromise} onFilterChange={handleFiltersChange} />
+      </section>
+
+      <section>
+        <InGameListModal dataPromise={dataPromise} unnecessaries={unnecessaries} />
       </section>
 
       <main>

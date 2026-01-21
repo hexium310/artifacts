@@ -6,6 +6,8 @@ import { VirtualScroll } from "@/components/VirtualScroll";
 import { parseArtifactHar } from "@/utils/parseArtifactHar";
 import { readHarFile } from "@/utils/readFile";
 
+import styles from "./styles.module.css";
+
 import type { FC } from "react";
 
 import type { ParseArtifactHarResult } from "@/utils/parseArtifactHar";
@@ -24,7 +26,7 @@ export const ArtifactData: FC = () => {
 
   return (
     <>
-      <VirtualScroll virtualScrollRef={virtualScrollRef}>
+      <VirtualScroll className={styles.flex} virtualScrollRef={virtualScrollRef}>
         <FileDrop onDrop={handleFileReceive} />
 
         <FilterableView dataPromise={dataPromise} virtualScrollRef={virtualScrollRef} />

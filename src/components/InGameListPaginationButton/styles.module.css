@@ -1,0 +1,28 @@
+.button {
+  padding: 0;
+  border: none;
+  aspect-ratio: 1 / 1;
+}
+
+.has-unnecessary-item {
+  color: #2f4f2f;
+  background-color: #eef4ee;
+  &:hover {
+    background-color: #ddeadd;
+  }
+}
+
+.current-page {
+  background-color: #e5e5e5;
+  color: #000;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+
+  &:hover {
+    background-color: revert;
+  }
+
+  &.has-unnecessary-item {
+    background-color: #d6e5d6;
+    color: #1f3d1f;
+  }
+}
