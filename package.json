@@ -10,7 +10,7 @@
     "lint": "eslint --flag unstable_native_nodejs_ts_config .",
     "preview": "pnpm run build && vite preview --host",
     "deploy": "pnpm run build && wrangler deploy",
-    "cf-typegen": "mkdir .wrangler && wrangler types ./.wrangler/worker-configuration.d.ts",
+    "cf-typegen": "mkdir -p .wrangler && wrangler types ./.wrangler/worker-configuration.d.ts",
     "postinstall": "pnpm run cf-typegen"
   },
   "dependencies": {
