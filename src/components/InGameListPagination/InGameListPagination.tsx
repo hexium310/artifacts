@@ -8,20 +8,17 @@ import styles from "./styles.module.css";
 import type { ChangeEventHandler, FC } from "react";
 
 interface InGameListPaginationProps {
-  readonly totalCount: number;
   readonly currentPage: number;
-  readonly hasUnnecessaryItemPages: number[];
+  readonly pages: [number, boolean][];
   readonly onClick: (page: number) => void;
 }
 
-export const InGameListPagination: FC<InGameListPaginationProps> = ({ totalCount, currentPage, hasUnnecessaryItemPages, onClick }) => {
+export const InGameListPagination: FC<InGameListPaginationProps> = ({ currentPage, pages, onClick }) => {
   const [isAll, setIsAll] = useState(false);
 
   const handleCheckboxClick: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     setIsAll(e.target.checked);
   }, []);
-
-  const pages = isAll ? [...Array<undefined>(totalCount)].map((_, i) => i + 1) : hasUnnecessaryItemPages;
 
   return (
     <div className={styles.container}>
@@ -33,17 +30,21 @@ export const InGameListPagination: FC<InGameListPaginationProps> = ({ totalCount
         すべてのページを表示
       </Checkbox>
       {
-        pages.map((page) => (
-          <InGameListPaginationButton
-            key={page}
-            page={page}
-            hasUnnecessaryItem={hasUnnecessaryItemPages.includes(page)}
-            isCurrentPage={page === currentPage}
-            onClick={onClick}
-          >
-            {page}
-          </InGameListPaginationButton>
-        ))
+        pages.map(([page, hasUnnecessaryItemPages]) => {
+          return isAll || hasUnnecessaryItemPages
+            ? (
+                <InGameListPaginationButton
+                  key={page}
+                  page={page}
+                  hasUnnecessaryItem={hasUnnecessaryItemPages}
+                  isCurrentPage={page === currentPage}
+                  onClick={onClick}
+                >
+                  {page}
+                </InGameListPaginationButton>
+              )
+            : null;
+        })
       }
     </div>
   );
