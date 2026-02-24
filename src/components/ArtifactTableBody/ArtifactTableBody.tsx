@@ -16,13 +16,21 @@ interface ArtifactTableBodyProps {
   readonly dataPromise: Promise<ParseArtifactHarResult>;
   readonly filters: Filters;
   readonly virtualScrollRef: RefObject<HTMLDivElement | null>;
+  readonly unnecessaries: Set<number>;
+  readonly onRowClick: (id: number) => void;
 }
 
 // When the window height is 1106px
 const NUMBER_OF_CHARS_EACH_LINE = 9;
 const LINE_HEIGHT = 23;
 
-export const ArtifactTableBody: FC<ArtifactTableBodyProps> = ({ dataPromise, filters, virtualScrollRef }) => {
+export const ArtifactTableBody: FC<ArtifactTableBodyProps> = ({
+  dataPromise,
+  filters,
+  virtualScrollRef,
+  unnecessaries,
+  onRowClick,
+}) => {
   const [artifacts] = use(dataPromise);
 
   const elementEnableds = Object
@@ -80,10 +88,12 @@ export const ArtifactTableBody: FC<ArtifactTableBodyProps> = ({ dataPromise, fil
             return (
               <ArtifactTableBodyRow
                 key={artifact.id}
+                artifactId={artifact.id}
                 className={styles.virtualScrollItem}
                 ref={(node) => { virtualizer.measureElement(node); }}
                 rowIndex={virtualRow.index}
                 rowStart={virtualRow.start.toString()}
+                isUnnecessary={unnecessaries.has(artifact.id)}
                 renderName={() => <td>{artifact.name}</td>}
                 renderElement={() => <td className={styles[artifact.element.id]}>{artifact.element.text}</td>}
                 renderWeaponSpecialty={() => <td>{artifact.weaponSpecialty.text}</td>}
@@ -97,6 +107,7 @@ export const ArtifactTableBody: FC<ArtifactTableBodyProps> = ({ dataPromise, fil
                     </td>
                   </Fragment>
                 ))}
+                onClick={onRowClick}
               />
             );
           })

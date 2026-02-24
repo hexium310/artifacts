@@ -1,0 +1,10 @@
+.dialog {
+  height: 90%;
+  width: 40%;
+}
+
+.content {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-gap: 8px;
+}

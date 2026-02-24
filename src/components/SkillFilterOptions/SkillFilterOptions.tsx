@@ -21,7 +21,7 @@ const groupIndex = {
 } as const;
 
 export const SkillFilterOptions: FC<SkillFilterOptionsProps> = ({ dataPromise, group }) => {
-  const [, skillGroups] = use(dataPromise);
+  const [,, skillGroups] = use(dataPromise);
 
   const skillGroup = skillGroups[groupIndex[group]];
 
