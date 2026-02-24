@@ -6,7 +6,7 @@ import stylistic from "@stylistic/eslint-plugin";
 import { defineConfig } from "eslint/config";
 import { importX } from "eslint-plugin-import-x";
 import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
+import { reactRefresh } from "eslint-plugin-react-refresh";
 import globals from "globals";
 import { configs as tseslintConfigs } from "typescript-eslint";
 
@@ -27,7 +27,7 @@ export default defineConfig(
       // @ts-expect-error https://github.com/un-ts/eslint-plugin-import-x/issues/421 https://github.com/typescript-eslint/typescript-eslint/issues/11543
       importX.flatConfigs.react,
       reactHooks.configs.flat["recommended-latest"],
-      reactRefresh.configs.vite,
+      reactRefresh.configs.vite(),
       stylistic.configs.customize({
         braceStyle: "1tbs",
         quoteProps: "as-needed",
