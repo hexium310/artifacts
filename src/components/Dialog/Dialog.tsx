@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 
 import styles from "./styles.module.css";
 
-import type { FC, FormEventHandler, ReactNode, RefObject } from "react";
+import type { FC, ReactNode, RefObject, SubmitEventHandler } from "react";
 
 import type { DialogRef } from "@/components/Dialog/hooks";
 
@@ -43,7 +43,7 @@ export const Dialog: FC<DialogProps> = ({ ref, children, dialogClassName, conten
 
   const isOpen = useSyncExternalStore(subscriber, getSnapshot, getServerSnapshot);
 
-  const handleSubmit: FormEventHandler = useCallback((e) => {
+  const handleSubmit: SubmitEventHandler = useCallback((e) => {
     e.stopPropagation();
   }, []);
 
