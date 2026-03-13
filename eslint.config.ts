@@ -22,9 +22,7 @@ export default defineConfig(
   {
     extends: [
       js.configs.recommended,
-      // @ts-expect-error https://github.com/un-ts/eslint-plugin-import-x/issues/421 https://github.com/typescript-eslint/typescript-eslint/issues/11543
       importX.flatConfigs.recommended,
-      // @ts-expect-error https://github.com/un-ts/eslint-plugin-import-x/issues/421 https://github.com/typescript-eslint/typescript-eslint/issues/11543
       importX.flatConfigs.react,
       reactHooks.configs.flat["recommended-latest"],
       reactRefresh.configs.vite(),
