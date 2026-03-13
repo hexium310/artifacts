@@ -41,8 +41,7 @@
     "type-fest": "^5.4.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",
-    "vite": "^7.3.1",
-    "vite-tsconfig-paths": "^6.1.1",
+    "vite": "^8.0.0",
     "wrangler": "^4.71.0"
   },
   "packageManager": "pnpm@10.30.3",
