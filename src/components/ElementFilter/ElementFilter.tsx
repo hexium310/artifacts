@@ -19,7 +19,7 @@ interface ElementFilterProps {
 const sortedElements = elements.sort((a, b) => a.attribute - b.attribute);
 
 export const ElementFilter: FC<ElementFilterProps> = ({ onChange }) => {
-  const [filterStatus, setFilterStatus] = useState<ElementFilterStatus>(elmentFilterDefault);
+  const [filterStatus, setFilterStatus] = useState(elmentFilterDefault);
 
   const handleResetButtonClick: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
     setFilterStatus(elmentFilterDefault);

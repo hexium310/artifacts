@@ -16,7 +16,7 @@ export const SkillFilterController: FC<SkillFilterControllerProps> = ({
   onFilterTypeChange,
   onResetButtonClick,
 }) => {
-  const [skillFilterType, setSkillFilterType] = useState<string>("marking");
+  const [skillFilterType, setSkillFilterType] = useState("marking");
 
   const handleSkillFilterTypeChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     const { value } = e.target;
