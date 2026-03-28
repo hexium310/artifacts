@@ -99,7 +99,7 @@ const destructiveMergeSkillGroup = (base: SkillGroup, skillGroup: SkillGroup): v
 const defaultValue = (): ParseArtifactHarResult => [[], {}, [{}, {}, {}]];
 
 export const parseArtifactHar = (har: ExternalData<Har> | null): ParseArtifactHarResult => {
-  const result = har?.log?.entries?.reduce<ParseArtifactHarResult>((pageAccumulator, entry, pageIndex) => {
+  const result = har?.log?.entries?.reduce((pageAccumulator, entry, pageIndex) => {
     const text = entry.response?.content?.text;
     if (text === undefined) {
       throw new Error("har response text is undefined");
@@ -107,7 +107,7 @@ export const parseArtifactHar = (har: ExternalData<Har> | null): ParseArtifactHa
 
     const page = JSON.parse(text) as ExternalData<RawPage>;
 
-    const [artifacts, artifactPositions, skillGroups] = page.list?.reduce<ParseArtifactHarResult>((listAccumulator, item, listIndex) => {
+    const [artifacts, artifactPositions, skillGroups] = page.list?.reduce((listAccumulator, item, listIndex) => {
       const artifact = pickArtifact(item);
       const listArtifactAccumulator = listAccumulator[0];
       const listArtifactPositionsAccumulator = listAccumulator[1];

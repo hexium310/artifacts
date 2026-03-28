@@ -19,7 +19,7 @@ interface WeaponSpecialtyFilterProps {
 const sortedWeaponSpecialties = weaponSpecialties.sort((a, b) => a.kind - b.kind);
 
 export const WeaponSpecialtyFilter: FC<WeaponSpecialtyFilterProps> = ({ onChange }) => {
-  const [filterStatus, setFilterStatus] = useState<WeaponSpecialtyFilterStatus>(weaponSpecialtyFilterDefault);
+  const [filterStatus, setFilterStatus] = useState(weaponSpecialtyFilterDefault);
 
   const handleResetButtonClick: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
     setFilterStatus(weaponSpecialtyFilterDefault);
