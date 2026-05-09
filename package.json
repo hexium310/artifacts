@@ -44,13 +44,5 @@
     "vite": "^8.0.10",
     "wrangler": "^4.87.0"
   },
-  "packageManager": "pnpm@11.0.9",
-  "pnpm": {
-    "allowBuilds": {
-      "esbuild": false,
-      "sharp": false,
-      "workerd": false,
-      "unrs-resolver": false
-    }
-  }
+  "packageManager": "pnpm@11.0.9"
 }
