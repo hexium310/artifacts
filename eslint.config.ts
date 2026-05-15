@@ -1,9 +1,8 @@
 import { fileURLToPath } from "node:url";
 
-import { includeIgnoreFile } from "@eslint/compat";
 import js from "@eslint/js";
 import stylistic from "@stylistic/eslint-plugin";
-import { defineConfig } from "eslint/config";
+import { defineConfig, includeIgnoreFile } from "eslint/config";
 import { importX } from "eslint-plugin-import-x";
 import reactHooks from "eslint-plugin-react-hooks";
 import { reactRefresh } from "eslint-plugin-react-refresh";
