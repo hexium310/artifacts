@@ -14,6 +14,7 @@
   "commitMessageExtra": "from {{currentVersion}} to {{newVersion}}",
   "commitMessageTopic": "{{#if isGroup}}the {{groupName}} group{{else}}{{depName}}{{/if}}",
   "commitMessageSuffix": "{{#if isGroup}}with {{upgrades.length}} updates{{/if}}",
+  "minimumReleaseAge": "3 days",
   "packageRules": [
     {
       "matchManagers": "npm",
@@ -32,7 +33,7 @@
         "wrangler",
         "@cloudflare/*"
       ],
-      "groupName": "cloudflare",
+      "groupName": "cloudflare"
     }
   ]
 }
