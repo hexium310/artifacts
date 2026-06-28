@@ -20,7 +20,7 @@
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "^1.40.0",
+    "@cloudflare/vite-plugin": "^1.42.2",
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@tsconfig/strictest": "^2.0.8",
@@ -41,7 +41,7 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.1",
     "vite": "^8.1.0",
-    "wrangler": "^4.98.0"
+    "wrangler": "^4.104.0"
   },
   "packageManager": "pnpm@11.9.0"
 }
